@@ -4,4 +4,7 @@ Name: sharedraftcontent
 SiteTree:
   extensions:
     - ShareDraftContentExtension
+CMSMain:
+  extensions:
+    - ShareDraftContentRequirementsExtension
 ---
