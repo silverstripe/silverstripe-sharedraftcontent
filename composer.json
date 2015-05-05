@@ -1,0 +1,26 @@
+{
+	"name": "silverstripe/sharedraftcontent",
+	"type": "silverstripe-module",
+	"description": "Share draft page content with non-CMS users",
+	"license": "BSD-3-Clause",
+	"keywords": ["silverstripe"],
+	"authors": [
+		{
+			"name": "Damian Mooyman",
+			"email": "damian.mooyman@gmail.com"
+		},
+		{
+			"name": "Christopher Pitt",
+			"email": "chris@silverstripe.com"
+		},
+		{
+			"name": "David Craig",
+			"email": "david@silverstripe.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.2",
+		"silverstripe/framework": "~3.1",
+		"flashbackzoo/copytoclipboard": "~1.0"
+	}
+}

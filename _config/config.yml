@@ -1,0 +1,7 @@
+---
+Name: sharedraftcontent
+---
+SiteTree:
+  extensions:
+    - ShareDraftContentExtension
+---
