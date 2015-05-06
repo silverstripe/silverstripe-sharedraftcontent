@@ -4,6 +4,10 @@
 	float: none;
 	display: inline-block;
 
+	p {
+		white-space: nowrap;
+	}
+
 	.ui-tabs-anchor {
 		padding: 0;
 	}
