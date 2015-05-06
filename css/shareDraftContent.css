@@ -1,6 +1,4 @@
-#share-draft-content { margin: 0; padding: 0; border: 0; }
-#share-draft-content .middleColumn { margin-left: 0; }
-#share-draft-content .copy-to-clipboard-button-wrapper { margin-left: -5px; }
-#share-draft-content label { margin-right: 4px; font-weight: bold; }
-#share-draft-content input.copy-to-clipboard { width: auto; padding: 5px; -moz-border-radius-topright: 0; -webkit-border-top-right-radius: 0; border-top-right-radius: 0; -moz-border-radius-bottomright: 0; -webkit-border-bottom-right-radius: 0; border-bottom-right-radius: 0; }
-#share-draft-content button.copy-to-clipboard-button { -moz-border-radius-topleft: 0; -webkit-border-top-left-radius: 0; border-top-left-radius: 0; -moz-border-radius-bottomleft: 0; -webkit-border-bottom-left-radius: 0; border-bottom-left-radius: 0; }
+#share-draft-content { float: none; display: inline-block; }
+#share-draft-content .ui-tabs-anchor { padding: 0; }
+#share-draft-content .ui-tabs-nav { padding-right: 0; padding-left: 7px; }
+#share-draft-content #share-draft-content-tab { right: 0; left: auto !important; padding: 10px 15px; }

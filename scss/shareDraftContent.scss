@@ -1,32 +1,21 @@
 @import "compass/css3/border-radius";
 
 #share-draft-content {
-	margin: 0;
-	padding: 0;
-	border: 0;
+	float: none;
+	display: inline-block;
 
-	.middleColumn {
-		margin-left: 0;
+	.ui-tabs-anchor {
+		padding: 0;
 	}
 
-	.copy-to-clipboard-button-wrapper {
-		margin-left: -5px;
+	.ui-tabs-nav {
+		padding-right: 0;
+		padding-left: 7px;
 	}
 
-	label {
-		margin-right: 4px;
-		font-weight: bold;
-	}
-
-	input.copy-to-clipboard {
-		width: auto;
-		padding: 5px;
-		@include border-top-right-radius(0);
-		@include border-bottom-right-radius(0);
-	}
-
-	button.copy-to-clipboard-button {
-		@include border-top-left-radius(0);
-		@include border-bottom-left-radius(0);
+	#share-draft-content-tab {
+		right: 0;
+		left: auto !important;
+		padding: 10px 15px;
 	}
 }
