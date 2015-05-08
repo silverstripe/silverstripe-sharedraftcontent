@@ -1,0 +1,66 @@
+@mixin small-screen {
+	@media (max-width: 860px) {
+		@content;
+	}
+}
+
+html {
+	height: 100%;
+}
+
+#share-draft-error-page {
+	position: relative;
+	height: 100%;
+	margin: 0;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	background: #eaf1f4;
+
+	.message {
+		position: absolute;
+		bottom: 66%;
+		left: 50%;
+		margin-left: -270px;
+		width: 540px;
+		text-align: center;
+		color: #3db1d5;
+		font-size: 1.4em;
+		font-weight: bold;
+		line-height: 1.6em;
+		z-index: 1;
+	}
+
+	.clouds {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 429px;
+		background: url('/sharedraftcontent/images/clouds.png') repeat-x 50% 0;
+		background: none, url('/sharedraftcontent/images/clouds.svg') repeat-x 50% 0;
+
+		@include small-screen {
+			height: 156px;
+			background: url('/sharedraftcontent/images/clouds-mobile.png') repeat-x 50% 0;
+			background: none, url('/sharedraftcontent/images/clouds-mobile.svg') repeat-x 50% 0;
+		}
+	}
+
+	.device {
+		position: absolute;
+		bottom: 0;
+		width: 826px;
+		height: 366px;
+		left: 50%;
+		margin-left: -413px;
+		background: url('/sharedraftcontent/images/ipad.png') no-repeat;
+		background: none, url('/sharedraftcontent/images/ipad.svg') no-repeat;
+
+		@include small-screen {
+			width: 286px;
+			height: 366px;
+			margin-left: -143px;
+			background: url('/sharedraftcontent/images/iphone.png') no-repeat;
+			background: none, url('/sharedraftcontent/images/iphone.svg') no-repeat;
+		}
+	}
+}
