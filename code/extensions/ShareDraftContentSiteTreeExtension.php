@@ -1,6 +1,6 @@
 <?php
 
-class ShareDraftContentExtension extends DataExtension {
+class ShareDraftContentSiteTreeExtension extends DataExtension {
 	/**
 	 * @var array
 	 */
@@ -21,7 +21,7 @@ class ShareDraftContentExtension extends DataExtension {
 	public function ShareTokenLink() {
 		$shareToken = $this->getNewShareToken();
 
-		return Controller::join_links($this->owner->Link(), 'preview', $this->generateKey($shareToken->Token), $shareToken->Token);
+		return Controller::join_links($this->owner->AbsoluteLink(), 'preview', $this->generateKey($shareToken->Token), $shareToken->Token);
 	}
 
 	/**

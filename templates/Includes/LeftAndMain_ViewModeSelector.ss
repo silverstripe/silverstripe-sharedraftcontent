@@ -12,14 +12,14 @@
 
 	<div id="share-draft-content" class="ss-tabset ss-ui-action-tabset action-menus">
 		<ul>
-			<li><a href="#share-draft-content-tab">Share draft</a></li>
+			<li><a class="popup-trigger" href="#share-draft-content-tab" data-makelink-action="$Controller.MakeLinkAction">Share draft</a></li>
 		</ul>
 		<div id="share-draft-content-tab">
 			<div>
 				<p>
 					Copy and send this draft link to anyone.
 				</p>
-				<input class="text" type="text" value="http://mysite.com/some-page?token=qwertyiuo123456789" readonly="readonly" />
+				<input class="text" type="text" readonly="readonly" />
 			</div>
 		</div>
 	</div>
