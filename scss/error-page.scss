@@ -1,5 +1,11 @@
 @mixin small-screen {
-	@media (max-width: 860px) {
+	@media (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin large-screen {
+	@media (min-width: 1441px) {
 		@content;
 	}
 }
@@ -28,20 +34,29 @@ html {
 		font-weight: bold;
 		line-height: 1.6em;
 		z-index: 1;
+		
+		@include small-screen {
+			margin-left: -35%;
+			width: 70%;
+		}		
 	}
 
 	.clouds {
 		position: absolute;
 		bottom: 0;
 		width: 100%;
-		height: 429px;
-		background: url('/sharedraftcontent/images/clouds.png') repeat-x 50% 0;
-		background: none, url('/sharedraftcontent/images/clouds.svg') repeat-x 50% 0;
+		height: 275px;
+		background: url('../images/clouds.png') repeat-x 50% 0;
+		background: none, url('../images/clouds.svg') repeat-x 50% 0;
+
+		@include large-screen {
+			height: 429px;
+		}
 
 		@include small-screen {
 			height: 156px;
-			background: url('/sharedraftcontent/images/clouds-mobile.png') repeat-x 50% 0;
-			background: none, url('/sharedraftcontent/images/clouds-mobile.svg') repeat-x 50% 0;
+			background: url('../images/clouds-mobile.png') repeat-x 50% 0;
+			background: none, url('../images/clouds-mobile.svg') repeat-x 50% 0;
 		}
 	}
 
@@ -52,15 +67,15 @@ html {
 		height: 366px;
 		left: 50%;
 		margin-left: -413px;
-		background: url('/sharedraftcontent/images/ipad.png') no-repeat;
-		background: none, url('/sharedraftcontent/images/ipad.svg') no-repeat;
+		background: url('../images/ipad.png') no-repeat;
+		background: none, url('../images/ipad.svg') no-repeat;
 
 		@include small-screen {
 			width: 286px;
 			height: 366px;
 			margin-left: -143px;
-			background: url('/sharedraftcontent/images/iphone.png') no-repeat;
-			background: none, url('/sharedraftcontent/images/iphone.svg') no-repeat;
+			background: url('../images/iphone.png') no-repeat;
+			background: none, url('../images/iphone.svg') no-repeat;
 		}
 	}
 }
