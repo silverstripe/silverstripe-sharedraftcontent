@@ -17,9 +17,7 @@
 		<div id="share-draft-content-tab">
 			<div>
 				<p>
-					Copy and send this draft link to anyone.<br>
-					'Ctrl + c' (Win)<br>
-					'Cmd + c' (OSX)
+					Copy and send this draft link to anyone.
 				</p>
 				<input class="text" type="text" value="http://mysite.com/some-page?token=qwertyiuo123456789" readonly="readonly" />
 			</div>
