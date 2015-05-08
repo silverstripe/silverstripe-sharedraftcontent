@@ -3,8 +3,11 @@ Name: sharedraftcontent
 ---
 SiteTree:
   extensions:
-    - ShareDraftContentExtension
+    - ShareDraftContentSiteTreeExtension
 CMSMain:
   extensions:
     - ShareDraftContentRequirementsExtension
+CMSPageEditController:
+  extensions:
+    - ShareDraftContentCMSPageEditControllerExtension
 ---
