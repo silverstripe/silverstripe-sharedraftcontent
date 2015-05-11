@@ -76,11 +76,11 @@ class ShareDraftController extends Controller {
 	}
 
 	/**
-	 * @param Page $page
+	 * @param mixed $page
 	 *
 	 * @return mixed
 	 */
-	protected function getControllerFor(Page $page) {
+	protected function getControllerFor($page) {
 		$config = Config::inst()->forClass('ShareDraftController');
 
 		$controller = $config->controller;
