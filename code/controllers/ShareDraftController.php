@@ -18,6 +18,7 @@ class ShareDraftController extends Controller {
 			// Show the draft content.
 			return $this->render();
 		} else {
+			Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/main.css');
 			return $this->renderWith('ShareDraftContentError');
 		}
 	}
