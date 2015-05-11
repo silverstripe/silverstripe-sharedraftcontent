@@ -1,0 +1,5 @@
+Page:
+  FirstSharedPage:
+    Name: 'First Shared Page'
+  SecondSharedPage:
+      Name: 'Second Shared Page'
