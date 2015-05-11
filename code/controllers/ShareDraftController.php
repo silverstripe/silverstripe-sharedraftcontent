@@ -35,9 +35,21 @@ class ShareDraftController extends Controller {
 
 		$page = $shareToken->Page();
 
+		$latest = $page->Versions(null, 'Version DESC')->first();
+
+		$controller = new ContentController($latest);
+
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
-			// TODO: Show the draft content
-			return $this->render();
+			$rendered = $controller->render();
+
+			$data = new ArrayData(array(
+				'Page' => $page,
+				'Latest' => $latest,
+			));
+
+			$include = (string) $data->renderWith('Includes/TopBar');
+
+			return str_replace('</body>', $include . '</body>', (string) $rendered);
 		} else {
 			return $this->errorPage();
 		}
