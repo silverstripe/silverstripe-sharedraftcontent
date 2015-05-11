@@ -6,8 +6,6 @@
 		<title><% if $MetaTitle %>$MetaTitle<% else %>$Title<% end_if %> &raquo; $SiteConfig.Title</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<link rel="stylesheet" href="/sharedraftcontent/css/main.css">
 	</head>
 	<body id="share-draft-error-page">
 		<div class="message">
