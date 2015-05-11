@@ -49,7 +49,7 @@ class ShareDraftController extends Controller {
 		$controller = $this->getControllerFor($latest);
 
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
-			Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/main.css');
+			Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/top-bar.css');
 
 			$rendered = $controller->render();
 
@@ -70,7 +70,7 @@ class ShareDraftController extends Controller {
 	 * @return HTMLText
 	 */
 	protected function errorPage() {
-		Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/main.css');
+		Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/error-page.css');
 
 		return $this->renderWith('ShareDraftContentError');
 	}

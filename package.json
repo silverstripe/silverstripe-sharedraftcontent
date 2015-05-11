@@ -7,8 +7,10 @@
     "node-sass": "^3.0.0"
   },
   "scripts": {
-    "build": "cat scss/*.scss | node-sass | cleancss --skip-shorthand-compacting --output css/main.css",
-    "build:dev": "cat scss/*.scss | node-sass > css/main.css"
+    "build:errorpage": "node-sass scss/error-page.scss | cleancss --skip-shorthand-compacting --output css/error-page.css",
+    "build:sharecomponent": "node-sass scss/share-component.scss | cleancss --skip-shorthand-compacting --output css/share-component.css",
+    "build:topbar": "node-sass scss/top-bar.scss | cleancss --skip-shorthand-compacting --output css/top-bar.css",
+    "build": "npm run build:errorpage && npm run build:sharecomponent && npm run build:topbar"
   },
   "repository": {
     "type": "git",
