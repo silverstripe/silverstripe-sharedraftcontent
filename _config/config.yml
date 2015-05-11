@@ -1,5 +1,6 @@
 ---
 Name: sharedraftcontent
+After: framework/routes#coreroutes
 ---
 SiteTree:
   extensions:
@@ -10,4 +11,7 @@ CMSMain:
 CMSPageEditController:
   extensions:
     - ShareDraftContentCMSPageEditControllerExtension
+Director:
+  rules:
+    'preview': 'ShareDraftController'
 ---
