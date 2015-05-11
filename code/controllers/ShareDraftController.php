@@ -49,6 +49,8 @@ class ShareDraftController extends Controller {
 		$controller = $this->getControllerFor($latest);
 
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
+			Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/main.css');
+
 			$rendered = $controller->render();
 
 			$data = new ArrayData(array(
