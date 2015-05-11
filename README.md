@@ -12,7 +12,9 @@ This module adds a 'Share draft' action menu to the CMS. This enables Content Au
 
 ## Installation
 
-`composer require silverstripe/sharedraftcontent`.
+```
+$ composer require silverstripe/sharedraftcontent
+```
 
 ## Documentation
 
