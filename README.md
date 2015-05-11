@@ -1,6 +1,7 @@
 # Share Draft Content
 
-[![Build Status](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent.svg)](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent)
+[![Build Status](http://img.shields.io/travis/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent)
+[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe-labs/silverstripe-shareddraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe-labs/silverstripe-shareddraftcontent)
 
 Share draft page content with non-CMS users.
 
