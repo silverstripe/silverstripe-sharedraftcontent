@@ -2,6 +2,15 @@
 
 class ShareDraftController extends Controller {
 	/**
+	 * Controller for rendering draft pages.
+	 *
+	 * @config
+	 *
+	 * @var string
+	 */
+	private static $controller = 'Page_Controller';
+
+	/**
 	 * @var array
 	 */
 	private static $allowed_actions = array(
@@ -37,7 +46,7 @@ class ShareDraftController extends Controller {
 
 		$latest = $page->Versions(null, 'Version DESC')->first();
 
-		$controller = new ContentController($latest);
+		$controller = $this->getControllerFor($latest);
 
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
 			$rendered = $controller->render();
@@ -62,5 +71,22 @@ class ShareDraftController extends Controller {
 		Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/main.css');
 
 		return $this->renderWith('ShareDraftContentError');
+	}
+
+	/**
+	 * @param Page $page
+	 *
+	 * @return mixed
+	 */
+	protected function getControllerFor(Page $page) {
+		$config = Config::inst()->forClass('ShareDraftController');
+
+		$controller = $config->controller;
+
+		if (!$controller || !class_exists($controller)) {
+			return new ContentController($page);
+		}
+
+		return new $controller($page);
 	}
 }
