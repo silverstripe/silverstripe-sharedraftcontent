@@ -2,6 +2,15 @@
 
 class ShareDraftContentSiteTreeExtension extends DataExtension {
 	/**
+	 * The number of days a shared link should be valid for, before expiring.
+	 *
+	 * @config
+	 *
+	 * @var int
+	 */
+	private static $valid_for_days = 30;
+
+	/**
 	 * @var array
 	 */
 	private static $db = array(
@@ -47,8 +56,13 @@ class ShareDraftContentSiteTreeExtension extends DataExtension {
 			))->first();
 		}
 
+		$config = Config::inst()->forClass('ShareDraftContentSiteTreeExtension');
+
+		$validForDays = $config->valid_for_days;
+
 		$token = ShareToken::create(array(
 			"Token" => $token,
+			"ValidForDays" => $validForDays,
 			"PageID" => $this->owner->ID,
 		));
 
