@@ -1,3 +1,9 @@
+@mixin mobile-screen {
+	@media (max-width: 768px) and (max-height: 540px) {
+		@content;
+	}
+}
+
 @mixin small-screen {
 	@media (max-width: 768px) {
 		@content;
@@ -38,6 +44,12 @@ html {
 		@include small-screen {
 			margin-left: -35%;
 			width: 70%;
+
+			@include mobile-screen {
+				font-size: 1.2em;
+				line-height: 1.4em;
+				bottom: 70%;
+			}
 		}		
 	}
 
@@ -76,6 +88,14 @@ html {
 			margin-left: -143px;
 			background: url('../images/iphone.png') no-repeat;
 			background: none, url('../images/iphone.svg') no-repeat;
+
+			@include mobile-screen {
+				width: 200px;
+				height: 256px;
+				margin-left: -100px;
+				background: url('../images/iphone-small.png') no-repeat;
+				background: none, url('../images/iphone-small.svg') no-repeat;
+			}
 		}
 	}
 }
