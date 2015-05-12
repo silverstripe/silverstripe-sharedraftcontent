@@ -17,4 +17,6 @@ before_script:
   - cd ~/builds/ss
 
 script: 
-  - - vendor/bin/phpunit sharedraftcontent/tests/
+  - composer self-update
+  - composer install
+  - vendor/bin/phpunit sharedraftcontent/tests/
