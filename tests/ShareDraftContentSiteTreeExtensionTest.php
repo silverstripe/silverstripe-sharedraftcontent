@@ -9,7 +9,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest {
 	/**
 	 * @var string
 	 */
-	public static $fixture_file = 'shareddraftcontent/tests/ShareDraftContentSiteTreeExtensionTest.yml';
+	public static $fixture_file = 'sharedraftcontent/tests/ShareDraftContentSiteTreeExtensionTest.yml';
 
 	public function testShareTokenLink() {
 		/**
