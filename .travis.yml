@@ -17,4 +17,4 @@ before_script:
   - cd ~/builds/ss
 
 script: 
-  - - vendor/bin/phpunit sharedraftcontent/tests
+  - - vendor/bin/phpunit sharedraftcontent/tests/
