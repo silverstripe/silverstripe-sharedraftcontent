@@ -9,7 +9,7 @@ class ShareTokenTest extends FunctionalTest {
 	/**
 	 * @var string
 	 */
-	public static $fixture_file = 'shareddraftcontent/tests/ShareTokenTest.yml';
+	public static $fixture_file = 'sharedraftcontent/tests/ShareTokenTest.yml';
 
 	public function testValidForDays() {
 		SS_Datetime::set_mock_now('2015-03-15 00:00:00');
