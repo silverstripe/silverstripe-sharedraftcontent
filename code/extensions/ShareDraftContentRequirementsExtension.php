@@ -2,7 +2,7 @@
 
 class ShareDraftContentRequirementsExtension extends DataExtension {
 	public function init() {
-		Requirements::css(SHAREDDRAFTCONTENT_DIR . '/css/share-component.css');
-		Requirements::javascript(SHAREDDRAFTCONTENT_DIR . '/javascript/main.js');
+		Requirements::css(SHAREDRAFTCONTENT_DIR . '/css/share-component.css');
+		Requirements::javascript(SHAREDRAFTCONTENT_DIR . '/javascript/main.js');
 	}
 }

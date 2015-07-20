@@ -1,3 +1,3 @@
 <?php
 
-define('SHAREDDRAFTCONTENT_DIR', basename(__DIR__));
+define('SHAREDRAFTCONTENT_DIR', basename(__DIR__));

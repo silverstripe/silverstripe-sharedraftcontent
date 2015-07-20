@@ -17,8 +17,12 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest {
 		 * these values are not the same.
 		 */
 
+		require_once(__DIR__ . "/../_config.php");
+
+		Page::add_extension('ShareDraftContentSiteTreeExtension');
+
 		/**
-		 * @var page $firstSharedPage
+		 * @var Page $firstSharedPage
 		 */
 		$firstSharedPage = $this->objFromFixture('Page', 'FirstSharedPage');
 
