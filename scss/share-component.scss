@@ -26,3 +26,9 @@
 		}
 	}
 }
+
+// TODO: Remove this when bug is fixed
+// Hide share draft button in preview mode to avoid bug
+#preview-mode-dropdown-in-preview #share-draft-content {
+	display: none;
+}
