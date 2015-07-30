@@ -8,9 +8,9 @@ SiteTree:
 CMSMain:
   extensions:
     - ShareDraftContentRequirementsExtension
-CMSPageEditController:
+Controller:
   extensions:
-    - ShareDraftContentCMSPageEditControllerExtension
+    - ShareDraftContentControllerExtension
 Director:
   rules:
     'preview': 'ShareDraftController'
