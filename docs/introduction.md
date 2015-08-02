@@ -1,4 +1,4 @@
-# Share Draft Content
+# Introduction
 
 [![Build Status](http://img.shields.io/travis/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent)
 [![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe-labs/silverstripe-sharedraftcontent)
@@ -7,22 +7,17 @@
 
 Share draft page content with non-CMS users.
 
-## Overview
+## Share Links
 
-This module adds a 'Share draft' action menu to the CMS. This enables Content Authors to generate tokenised links to draft pages. Content authors can share these links with anyone, allowing non-CMS user to view draft page content. Each preview link is valid for 30 days.
+The generated share links have a public key and hash. There can be any number of share links per-page, but all share links are unique, and cannot be used to gain access to pages other than the one each link was created for.
 
-## Requirements
+## Sections
 
-- SilverStripe ^3.1
+- [Getting Started](getting-started.md)
+- [Developer Tools](developer-tools.md)
 
-## Installation
+## Questions
 
-```
-$ composer require silverstripe/sharedraftcontent
-```
+This module was created by [SilverStripe](https://twitter.com/silverstripe). You can ask questions on Twitter.
 
-You'll also need to run `dev/build`.
-
-## Documentation
-
-See the [docs/en](docs/en/introduction.md) folder.
+You can report bugs or request features on [GitHub](https://github.com/silverstripe-labs/silverstripe-sharedraftcontent/issues).
