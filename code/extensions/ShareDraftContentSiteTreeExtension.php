@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @mixin SiteTree
+ */
 class ShareDraftContentSiteTreeExtension extends DataExtension {
 	/**
 	 * The number of days a shared link should be valid for, before expiring.
@@ -25,12 +28,19 @@ class ShareDraftContentSiteTreeExtension extends DataExtension {
 	);
 
 	/**
+	 * @var array
+	 */
+	private static $allowed_actions = array(
+		'MakeShareDraftLink'
+	);
+
+	/**
 	 * @return string
 	 */
 	public function ShareTokenLink() {
 		$shareToken = $this->getNewShareToken();
 
-		return Controller::join_links($this->owner->AbsoluteLink(), 'preview', $this->generateKey($shareToken->Token), $shareToken->Token);
+		return Controller::join_links(Director::absoluteBaseURL(), 'preview', $this->generateKey($shareToken->Token), $shareToken->Token);
 	}
 
 	/**
@@ -87,5 +97,13 @@ class ShareDraftContentSiteTreeExtension extends DataExtension {
 	 */
 	public function generateKey($salt) {
 		return hash_pbkdf2('sha256', $salt, $this->owner->SharedTokenSalt, 1000, 16);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getShareDraftLinkAction()
+	{
+		return $this->owner->Link('MakeShareDraftLink');
 	}
 }

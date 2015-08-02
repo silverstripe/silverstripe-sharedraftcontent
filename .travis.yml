@@ -20,5 +20,5 @@ before_script:
   - cd ~/builds/ss
   - composer install
 
-script: 
-  - vendor/bin/phpunit sharedraftcontent/tests/
+script:
+  - vendor/bin/phpunit sharedraftcontent/tests

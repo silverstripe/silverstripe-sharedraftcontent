@@ -12,7 +12,11 @@
 
 	<div id="share-draft-content" class="ss-tabset ss-ui-action-tabset action-menus">
 		<ul>
-			<li><a class="popup-trigger" href="#share-draft-content-tab" data-makelink-action="$Controller.MakeLinkAction">Share draft</a></li>
+			<% if $CurrentPage.ShareDraftLinkAction %>
+				<li><a class="popup-trigger" href="#share-draft-content-tab" data-makelink-action="{$CurrentPage.ShareDraftLinkAction}">Share draft</a></li>
+			<% else %>
+				<li><a class="popup-trigger" href="#share-draft-content-tab" data-makelink-action="{$Controller.CurrentPage.ShareDraftLinkAction}">Share draft</a></li>
+			<% end_if %>
 		</ul>
 		<div id="share-draft-content-tab">
 			<div>
