@@ -42,25 +42,50 @@ class ShareDraftController extends Controller {
 			return $this->errorPage();
 		}
 
-		$page = $shareToken->Page();
+		$page = Versioned::get_one_by_stage(
+			'SiteTree',
+			'Stage',
+			sprintf('"SiteTree"."ID" = \'%d\'', $shareToken->PageID)
+		);
 
-		$latest = $page->Versions(null, 'Version DESC')->first();
+		$latest = Versioned::get_latest_version('SiteTree', $shareToken->PageID);
 
-		$controller = $this->getControllerFor($latest);
+		$controller = $this->getControllerFor($page);
 
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
 			Requirements::css(SHAREDRAFTCONTENT_DIR . '/css/top-bar.css');
 
-			$rendered = $controller->render();
+			// Temporarily un-secure the draft site and switch to draft
+			$oldSecured = Session::get('unsecuredDraftSite');
+			$oldMode = Versioned::get_reading_mode();
+			$restore = function() use ($oldSecured, $oldMode) {
+				Session::set('unsecuredDraftSite', $oldSecured);
+				Versioned::set_reading_mode($oldMode);
+			};
 
-			$data = new ArrayData(array(
-				'Page' => $page,
-				'Latest' => $latest,
-			));
+			// Process page inside an unsecured draft container
+			try {
+				Session::set('unsecuredDraftSite', true);
+				Versioned::reading_stage('Stage');
 
-			$include = (string) $data->renderWith('Includes/TopBar');
+				// Create mock request; Simplify request to single top level reqest
+				$pageRequest = new SS_HTTPRequest('GET', $page->URLSegment);
+				$pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
+				$rendered = $controller->handleRequest($pageRequest, $this->model);
 
-			return str_replace('</body>', $include . '</body>', (string) $rendered);
+				// Render draft heading
+				$data = new ArrayData(array(
+					'Page' => $page,
+					'Latest' => $latest,
+				));
+				$include = (string) $data->renderWith('Includes/TopBar');
+			} catch(Exception $ex) {
+				$restore();
+				throw $ex;
+			}
+			$restore();
+
+			return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
 		} else {
 			return $this->errorPage();
 		}
