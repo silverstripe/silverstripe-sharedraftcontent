@@ -51,7 +51,7 @@ class ShareDraftController extends Controller {
 		if(!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
 			Requirements::css(SHAREDRAFTCONTENT_DIR . '/css/top-bar.css');
 
-			$rendered = $controller->render();
+			$rendered = $controller->handleRequest($request);
 
 			$data = new ArrayData(array(
 				'Page' => $page,
@@ -60,7 +60,7 @@ class ShareDraftController extends Controller {
 
 			$include = (string) $data->renderWith('Includes/TopBar');
 
-			return str_replace('</body>', $include . '</body>', (string) $rendered);
+			return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
 		} else {
 			return $this->errorPage();
 		}
