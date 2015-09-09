@@ -19,7 +19,6 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.3",
 		"silverstripe/framework": "~3.1",
 		"silverstripe/cms": "~3.1",
 		"assertchris/hash-compat": "~1.0"
