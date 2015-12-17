@@ -5,83 +5,85 @@
  *
  * @package shareddraftcontent
  */
-class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest {
-	/**
-	 * @var string
-	 */
-	public static $fixture_file = 'sharedraftcontent/tests/ShareDraftContentSiteTreeExtensionTest.yml';
+class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
+{
+    /**
+     * @var string
+     */
+    public static $fixture_file = 'sharedraftcontent/tests/ShareDraftContentSiteTreeExtensionTest.yml';
 
-	public function testShareTokenLink() {
-		/**
-		 * First we check if both pages generate new ShareTokenSalt values. Then we check that
-		 * these values are not the same.
-		 */
+    public function testShareTokenLink()
+    {
+        /**
+         * First we check if both pages generate new ShareTokenSalt values. Then we check that
+         * these values are not the same.
+         */
 
-		require_once(__DIR__ . "/../_config.php");
+        require_once(__DIR__ . "/../_config.php");
 
-		Page::add_extension('ShareDraftContentSiteTreeExtension');
+        Page::add_extension('ShareDraftContentSiteTreeExtension');
 
-		/**
-		 * @var Page $firstSharedPage
-		 */
-		$firstSharedPage = $this->objFromFixture('Page', 'FirstSharedPage');
+        /**
+         * @var Page $firstSharedPage
+         */
+        $firstSharedPage = $this->objFromFixture('Page', 'FirstSharedPage');
 
-		$firstShareLink = $firstSharedPage->ShareTokenLink();
+        $firstShareLink = $firstSharedPage->ShareTokenLink();
 
-		$this->assertNotEmpty($firstSharedPage->ShareTokenSalt);
+        $this->assertNotEmpty($firstSharedPage->ShareTokenSalt);
 
-		/**
-		 * @var page $secondSharedPage
-		 */
-		$secondSharedPage = $this->objFromFixture('Page', 'SecondSharedPage');
+        /**
+         * @var page $secondSharedPage
+         */
+        $secondSharedPage = $this->objFromFixture('Page', 'SecondSharedPage');
 
-		$secondShareLink = $secondSharedPage->ShareTokenLink();
+        $secondShareLink = $secondSharedPage->ShareTokenLink();
 
-		$this->assertNotEmpty($secondSharedPage->ShareTokenSalt);
+        $this->assertNotEmpty($secondSharedPage->ShareTokenSalt);
 
-		$this->assertNotEquals($firstShareLink, $secondShareLink);
+        $this->assertNotEquals($firstShareLink, $secondShareLink);
 
-		/**
-		 * Then we get the underlying token and send a preview request. With a valid key and token,
-		 * this will return a draft page. With an invalid key or token, this will return an expired
-		 * link page.
-		 */
+        /**
+         * Then we get the underlying token and send a preview request. With a valid key and token,
+         * this will return a draft page. With an invalid key or token, this will return an expired
+         * link page.
+         */
 
-		$firstSharedPageToken = $firstSharedPage->ShareTokens()->first();
+        $firstSharedPageToken = $firstSharedPage->ShareTokens()->first();
 
-		$this->assertNotEmpty($firstSharedPageToken);
+        $this->assertNotEmpty($firstSharedPageToken);
 
-		$parts = explode('/', $firstShareLink);
+        $parts = explode('/', $firstShareLink);
 
-		$token = array_pop($parts);
-		$key = array_pop($parts);
+        $token = array_pop($parts);
+        $key = array_pop($parts);
 
-		$this->assertEquals($token, $firstSharedPageToken->Token);
+        $this->assertEquals($token, $firstSharedPageToken->Token);
 
-		$request = new SS_HTTPRequest('GET', $firstShareLink);
+        $request = new SS_HTTPRequest('GET', $firstShareLink);
 
-		$request->setRouteParams(array(
-			'Token' => $token,
-			'Key' => $key,
-		));
+        $request->setRouteParams(array(
+            'Token' => $token,
+            'Key' => $key,
+        ));
 
-		$controller = new ShareDraftController($firstSharedPage);
+        $controller = new ShareDraftController($firstSharedPage);
 
-		$response = $controller->preview($request);
+        $response = $controller->preview($request);
 
-		$this->assertContains('share-draft-content-message', $response);
+        $this->assertContains('share-draft-content-message', $response);
 
-		$request = new SS_HTTPRequest('GET', $firstShareLink);
+        $request = new SS_HTTPRequest('GET', $firstShareLink);
 
-		$request->setRouteParams(array(
-			'Token' => $token,
-			'Key' => '',
-		));
+        $request->setRouteParams(array(
+            'Token' => $token,
+            'Key' => '',
+        ));
 
-		$controller = new ShareDraftController($firstSharedPage);
+        $controller = new ShareDraftController($firstSharedPage);
 
-		$response = $controller->preview($request);
+        $response = $controller->preview($request);
 
-		$this->assertContains('share-draft-error-page', $response);
-	}
+        $this->assertContains('share-draft-error-page', $response);
+    }
 }

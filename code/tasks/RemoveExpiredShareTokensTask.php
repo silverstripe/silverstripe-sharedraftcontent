@@ -6,31 +6,34 @@
  *
  * To run this action the user needs admin rights.
  */
-class RemoveExpiredShareTokens extends BuildTask {
+class RemoveExpiredShareTokens extends BuildTask
+{
 
-	protected $title = 'Remove expired share tokens';
+    protected $title = 'Remove expired share tokens';
 
-	protected $description = 'Remove all expired ShareTokens from the database';
+    protected $description = 'Remove all expired ShareTokens from the database';
 
-	public function init() {
-		parent::init();
+    public function init()
+    {
+        parent::init();
 
-		if(!Permission::check('ADMIN')) {
-			return Security::permissionFailure($this);
-		}
-	}
+        if (!Permission::check('ADMIN')) {
+            return Security::permissionFailure($this);
+        }
+    }
 
-	public function run($request) {
-		$shareTokens = ShareToken::get();
-		$removeCount = 0;
+    public function run($request)
+    {
+        $shareTokens = ShareToken::get();
+        $removeCount = 0;
 
-		foreach ($shareTokens as $token) {
-			if ($token->isExpired()) {
-				$token->delete();
-				$removeCount++;
-			}
-		}
+        foreach ($shareTokens as $token) {
+            if ($token->isExpired()) {
+                $token->delete();
+                $removeCount++;
+            }
+        }
 
-		echo "Removed $removeCount expired share tokens.\n";
-	}
+        echo "Removed $removeCount expired share tokens.\n";
+    }
 }

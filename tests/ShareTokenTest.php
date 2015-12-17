@@ -5,27 +5,29 @@
  *
  * @package shareddraftcontent
  */
-class ShareTokenTest extends FunctionalTest {
-	/**
-	 * @var string
-	 */
-	public static $fixture_file = 'sharedraftcontent/tests/ShareTokenTest.yml';
+class ShareTokenTest extends FunctionalTest
+{
+    /**
+     * @var string
+     */
+    public static $fixture_file = 'sharedraftcontent/tests/ShareTokenTest.yml';
 
-	public function testValidForDays() {
-		SS_Datetime::set_mock_now('2015-03-15 00:00:00');
+    public function testValidForDays()
+    {
+        SS_Datetime::set_mock_now('2015-03-15 00:00:00');
 
-		/**
-		 * @var ShareToken $validToken
-		 */
-		$validToken = $this->objFromFixture('ShareToken', 'ValidToken');
+        /**
+         * @var ShareToken $validToken
+         */
+        $validToken = $this->objFromFixture('ShareToken', 'ValidToken');
 
-		$this->assertFalse($validToken->isExpired());
+        $this->assertFalse($validToken->isExpired());
 
-		/**
-		 * @var ShareToken $invalidToken
-		 */
-		$invalidToken = $this->objFromFixture('ShareToken', 'InvalidToken');
+        /**
+         * @var ShareToken $invalidToken
+         */
+        $invalidToken = $this->objFromFixture('ShareToken', 'InvalidToken');
 
-		$this->assertTrue($invalidToken->isExpired());
-	}
+        $this->assertTrue($invalidToken->isExpired());
+    }
 }
