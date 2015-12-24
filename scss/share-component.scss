@@ -1,6 +1,8 @@
 #share-draft-content {
 	float: none;
 	display: inline-block;
+	vertical-align: top;
+	margin-top: 0;
 
 	p {
 		white-space: nowrap;
@@ -13,6 +15,10 @@
 	.ui-tabs-nav {
 		padding-right: 0;
 		padding-left: 7px;
+	}
+
+	.popup-trigger::after {
+		height: 15px;
 	}
 
 	#share-draft-content-tab {
