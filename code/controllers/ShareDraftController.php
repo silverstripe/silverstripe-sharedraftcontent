@@ -38,7 +38,7 @@ class ShareDraftController extends Controller
         /**
          * @var ShareToken $shareToken
          */
-        $shareToken = ShareToken::get()->filter('token', $token)->first();
+        $shareToken = ShareToken::get()->filter('Token', $token)->first();
 
         if (!$shareToken) {
             return $this->errorPage();
