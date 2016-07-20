@@ -70,7 +70,10 @@ class ShareDraftController extends Controller
                 Session::set('unsecuredDraftSite', true);
                 Versioned::reading_stage('Stage');
 
-                // Create mock request; Simplify request to single top level reqest
+                // Hack to get around ContentController::init() redirecting on home page
+                $_FILES = array(array());
+
+                // Create mock request; Simplify request to single top level request
                 $pageRequest = new SS_HTTPRequest('GET', $page->URLSegment);
                 $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
                 $rendered = $controller->handleRequest($pageRequest, $this->model);
@@ -110,14 +113,6 @@ class ShareDraftController extends Controller
      */
     protected function getControllerFor($page)
     {
-        $config = Config::inst()->forClass('ShareDraftController');
-
-        $controller = $config->controller;
-
-        if (!$controller || !class_exists($controller)) {
-            return new ContentController($page);
-        }
-
-        return new $controller($page);
+        return ModelAsController::controller_for($page);
     }
 }
