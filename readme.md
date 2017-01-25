@@ -1,8 +1,8 @@
 # Share Draft Content
 
-[![Build Status](http://img.shields.io/travis/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent)
-[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe-labs/silverstripe-sharedraftcontent)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe-labs/silverstripe-sharedraftcontent)
+[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe/silverstripe-sharedraftcontent)
+[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent)
 [![Version](http://img.shields.io/packagist/v/silverstripe/sharedraftcontent.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-sharedraftcontent)
 [![License](http://img.shields.io/packagist/l/silverstripe/sharedraftcontent.svg?style=flat-square)](LICENSE.md)
 ![helpfulrobot](https://helpfulrobot.io/silverstripe/sharedraftcontent/badge)
@@ -15,7 +15,7 @@ This module adds a 'Share draft' action menu to the CMS. This enables Content Au
 
 ## Requirements
 
-- SilverStripe ^3.1
+- SilverStripe ^4.0
 
 ## Installation
 
@@ -37,4 +37,4 @@ All methods, with `public` visibility, are part of the public API. All other met
 
 ## Reporting Issues
 
-Please [create an issue](http://github.com/silverstripe-labs/silverstripe-sharedraftcontent/issues) for any bugs you've found, or features you're missing.
+Please [create an issue](http://github.com/silverstripe/silverstripe-sharedraftcontent/issues) for any bugs you've found, or features you're missing.

@@ -2,16 +2,15 @@
 Name: sharedraftcontent
 After: framework/routes#coreroutes
 ---
-SiteTree:
+SilverStripe\CMS\Model\SiteTree:
   extensions:
-    - ShareDraftContentSiteTreeExtension
-CMSMain:
+    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension
+SilverStripe\CMS\Controllers\CMSMain:
   extensions:
-    - ShareDraftContentRequirementsExtension
-Controller:
+    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentRequirementsExtension
+SilverStripe\Control\Controller:
   extensions:
-    - ShareDraftContentControllerExtension
-Director:
+    - SilverStripe\ShareDraftContent\Controllers\ShareDraftContentControllerExtension
+SilverStripe\Core\Director:
   rules:
-    'preview': 'ShareDraftController'
----
+    'preview': 'SilverStripe\ShareDraftContent\Controllers\ShareDraftController'
