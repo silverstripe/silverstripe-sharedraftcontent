@@ -1,9 +1,16 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Extensions;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\Requirements;
+
 class ShareDraftContentRequirementsExtension extends DataExtension
 {
     /**
-     * @inheritdoc
+     * @todo Once CMSMain::init is protected, update visibility
+     *
+     * {@inheritDoc}
      */
     public function init()
     {

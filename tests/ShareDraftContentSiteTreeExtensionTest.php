@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Tests;
+
+use Page;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\ShareDraftContent\Controllers\ShareDraftController;
+use SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension;
+
 /**
  * @mixin PHPUnit_Framework_TestCase
  *
@@ -10,7 +19,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
     /**
      * @var string
      */
-    public static $fixture_file = 'sharedraftcontent/tests/ShareDraftContentSiteTreeExtensionTest.yml';
+    protected static $fixture_file = 'ShareDraftContentSiteTreeExtensionTest.yml';
 
     public function testShareTokenLink()
     {
@@ -19,14 +28,12 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
          * these values are not the same.
          */
 
-        require_once(__DIR__ . "/../_config.php");
-
-        Page::add_extension('ShareDraftContentSiteTreeExtension');
+        Page::add_extension(ShareDraftContentSiteTreeExtension::class);
 
         /**
          * @var Page $firstSharedPage
          */
-        $firstSharedPage = $this->objFromFixture('Page', 'FirstSharedPage');
+        $firstSharedPage = $this->objFromFixture(Page::class, 'FirstSharedPage');
 
         $firstShareLink = $firstSharedPage->ShareTokenLink();
 
@@ -35,7 +42,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
         /**
          * @var page $secondSharedPage
          */
-        $secondSharedPage = $this->objFromFixture('Page', 'SecondSharedPage');
+        $secondSharedPage = $this->objFromFixture(Page::class, 'SecondSharedPage');
 
         $secondShareLink = $secondSharedPage->ShareTokenLink();
 
@@ -60,7 +67,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
 
         $this->assertEquals($token, $firstSharedPageToken->Token);
 
-        $request = new SS_HTTPRequest('GET', $firstShareLink);
+        $request = new HTTPRequest('GET', $firstShareLink);
 
         $request->setRouteParams(array(
             'Token' => $token,
@@ -73,7 +80,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
 
         $this->assertContains('share-draft-content-message', $response);
 
-        $request = new SS_HTTPRequest('GET', $firstShareLink);
+        $request = new HTTPRequest('GET', $firstShareLink);
 
         $request->setRouteParams(array(
             'Token' => $token,

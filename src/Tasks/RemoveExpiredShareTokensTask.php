@@ -1,4 +1,12 @@
 <?php
+
+namespace SilverStripe\ShareDraftContent\Tasks;
+
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\Security;
+use SilverStripe\ShareDraftContent\Models\ShareToken;
+
 /**
  * Remove expired share tokens.
  *
@@ -8,19 +16,11 @@
  */
 class RemoveExpiredShareTokens extends BuildTask
 {
+    private static $segment = 'RemoveExpiredShareTokens';
 
     protected $title = 'Remove expired share tokens';
 
     protected $description = 'Remove all expired ShareTokens from the database';
-
-    public function init()
-    {
-        parent::init();
-
-        if (!Permission::check('ADMIN')) {
-            return Security::permissionFailure($this);
-        }
-    }
 
     public function run($request)
     {

@@ -1,5 +1,11 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Tests;
+
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\ShareDraftContent\Models\ShareToken;
+
 /**
  * @mixin PHPUnit_Framework_TestCase
  *
@@ -10,23 +16,23 @@ class ShareTokenTest extends FunctionalTest
     /**
      * @var string
      */
-    public static $fixture_file = 'sharedraftcontent/tests/ShareTokenTest.yml';
+    protected static $fixture_file = 'ShareTokenTest.yml';
 
     public function testValidForDays()
     {
-        SS_Datetime::set_mock_now('2015-03-15 00:00:00');
+        DBDatetime::set_mock_now('2015-03-15 00:00:00');
 
         /**
          * @var ShareToken $validToken
          */
-        $validToken = $this->objFromFixture('ShareToken', 'ValidToken');
+        $validToken = $this->objFromFixture(ShareToken::class, 'ValidToken');
 
         $this->assertFalse($validToken->isExpired());
 
         /**
          * @var ShareToken $invalidToken
          */
-        $invalidToken = $this->objFromFixture('ShareToken', 'InvalidToken');
+        $invalidToken = $this->objFromFixture(ShareToken::class, 'InvalidToken');
 
         $this->assertTrue($invalidToken->isExpired());
     }

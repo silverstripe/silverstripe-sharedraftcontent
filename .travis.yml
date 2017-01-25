@@ -12,18 +12,13 @@ env:
 matrix:
   include:
     - php: 5.6
-      env: DB=PGSQL CORE_RELEASE=3
+      env: DB=PGSQL CORE_RELEASE=4
 
 before_script:
   - composer self-update || true
   - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
   - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
   - cd ~/builds/ss
-  - composer install
 
 script:
-  - vendor/bin/phpunit --coverage-clover coverage.clover sharedraftcontent/tests
-
-after_success:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - vendor/bin/phpunit sharedraftcontent/tests/

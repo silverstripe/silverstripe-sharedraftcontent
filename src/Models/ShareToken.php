@@ -1,5 +1,11 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Models;
+
+use Page;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBDatetime;
+
 /**
  * @method Page Page()
  *
@@ -20,8 +26,13 @@ class ShareToken extends DataObject
      * @var array
      */
     private static $has_one = array(
-        'Page' => 'Page'
+        'Page' => Page::class
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'ShareToken';
 
     /**
      * Determines whether the token is still valid (from days since it was created).
@@ -34,7 +45,7 @@ class ShareToken extends DataObject
 
         $validForSeconds = (int) $this->ValidForDays * 24 * 60 * 60;
 
-        $nowSeconds = strtotime(SS_DateTime::now()->Format("Y-m-d H:i:s"));
+        $nowSeconds = strtotime(DBDatetime::now()->Format("Y-m-d H:i:s"));
 
         return ($createdSeconds + $validForSeconds) <= $nowSeconds;
     }

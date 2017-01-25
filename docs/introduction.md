@@ -1,7 +1,7 @@
 # Introduction
 
-[![Build Status](http://img.shields.io/travis/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe-labs/silverstripe-sharedraftcontent)
-[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe-labs/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe-labs/silverstripe-sharedraftcontent)
+[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe/silverstripe-sharedraftcontent)
+[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent)
 [![Version](http://img.shields.io/packagist/v/silverstripe/sharedraftcontent.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-sharedraftcontent)
 [![License](http://img.shields.io/packagist/l/silverstripe/sharedraftcontent.svg?style=flat-square)](LICENSE.md)
 
@@ -20,4 +20,4 @@ The generated share links have a public key and hash. There can be any number of
 
 This module was created by [SilverStripe](https://twitter.com/silverstripe). You can ask questions on Twitter.
 
-You can report bugs or request features on [GitHub](https://github.com/silverstripe-labs/silverstripe-sharedraftcontent/issues).
+You can report bugs or request features on [GitHub](https://github.com/silverstripe/silverstripe-sharedraftcontent/issues).

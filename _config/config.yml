@@ -10,7 +10,7 @@ SilverStripe\CMS\Controllers\CMSMain:
     - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentRequirementsExtension
 SilverStripe\Control\Controller:
   extensions:
-    - SilverStripe\ShareDraftContent\Controllers\ShareDraftContentControllerExtension
-SilverStripe\Core\Director:
+    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentControllerExtension
+SilverStripe\Control\Director:
   rules:
     'preview': 'SilverStripe\ShareDraftContent\Controllers\ShareDraftController'
