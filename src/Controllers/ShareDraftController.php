@@ -1,5 +1,19 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Controllers;
+
+use Exception;
+use PageController;
+use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\Session;
+use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\ShareDraftContent\Models\ShareToken;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
+
 class ShareDraftController extends Controller
 {
     /**
@@ -9,7 +23,7 @@ class ShareDraftController extends Controller
      *
      * @var string
      */
-    private static $controller = 'Page_Controller';
+    private static $controller = PageController::class;
 
     /**
      * @var array
@@ -26,11 +40,11 @@ class ShareDraftController extends Controller
     );
 
     /**
-     * @param SS_HTTPRequest $request
+     * @param HTTPRequest $request
      *
      * @return string|HTMLText
      */
-    public function preview(SS_HTTPRequest $request)
+    public function preview(HTTPRequest $request)
     {
         $key = $request->param('Key');
         $token = $request->param('Token');
@@ -45,12 +59,12 @@ class ShareDraftController extends Controller
         }
 
         $page = Versioned::get_one_by_stage(
-            'SiteTree',
+            SiteTree::class,
             'Stage',
             sprintf('"SiteTree"."ID" = \'%d\'', $shareToken->PageID)
         );
 
-        $latest = Versioned::get_latest_version('SiteTree', $shareToken->PageID);
+        $latest = Versioned::get_latest_version(SiteTree::class, $shareToken->PageID);
 
         $controller = $this->getControllerFor($page);
 
@@ -68,13 +82,13 @@ class ShareDraftController extends Controller
             // Process page inside an unsecured draft container
             try {
                 Session::set('unsecuredDraftSite', true);
-                Versioned::reading_stage('Stage');
+                Versioned::set_stage('Stage');
 
                 // Hack to get around ContentController::init() redirecting on home page
                 $_FILES = array(array());
 
                 // Create mock request; Simplify request to single top level request
-                $pageRequest = new SS_HTTPRequest('GET', $page->URLSegment);
+                $pageRequest = new HTTPRequest('GET', $page->URLSegment);
                 $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
                 $rendered = $controller->handleRequest($pageRequest, $this->model);
 

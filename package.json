@@ -1,6 +1,6 @@
 {
   "name": "sharedraftcontent",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Share draft page content with non-CMS users",
   "devDependencies": {
     "clean-css": "^3.2.8",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/silverstripe-labs/silverstripe-sharedraftcontent.git"
+    "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent.git"
   },
   "keywords": [
     "SilverStripe"
   ],
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/silverstripe-labs/silverstripe-sharedraftcontent/issues"
+    "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent/issues"
   },
-  "homepage": "https://github.com/silverstripe-labs/silverstripe-sharedraftcontent"
+  "homepage": "https://github.com/silverstripe/silverstripe-sharedraftcontent"
 }

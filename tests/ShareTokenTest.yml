@@ -4,12 +4,12 @@ Page:
   InvalidTokenPage:
     Name: 'Page With An Invalid Token'
 
-ShareToken:
+SilverStripe\ShareDraftContent\Models\ShareToken:
   ValidToken:
-    PageID: =>Page.ValidTokenPage
+    Page: =>Page.ValidTokenPage
     Created: '2015-03-01 00:00:00'
     ValidForDays: 30
   InvalidToken:
-    PageID: =>Page.InvalidTokenPage
+    Page: =>Page.InvalidTokenPage
     Created: '2015-01-01 00:00:00'
     ValidForDays: 30

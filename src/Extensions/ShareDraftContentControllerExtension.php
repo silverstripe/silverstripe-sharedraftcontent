@@ -1,5 +1,11 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Extensions;
+
+use SilverStripe\Core\Extension;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
+
 class ShareDraftContentControllerExtension extends Extension
 {
     /**

@@ -1,5 +1,14 @@
 <?php
 
+namespace SilverStripe\ShareDraftContent\Extensions;
+
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Security\RandomGenerator;
+use SilverStripe\ShareDraftContent\Models\ShareToken;
+
 /**
  * @mixin SiteTree
  */
@@ -25,7 +34,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
      * @var array
      */
     private static $has_many = array(
-        'ShareTokens' => 'ShareToken',
+        'ShareTokens' => ShareToken::class,
     );
 
     /**
@@ -42,7 +51,12 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
     {
         $shareToken = $this->getNewShareToken();
 
-        return Controller::join_links(Director::absoluteBaseURL(), 'preview', $this->generateKey($shareToken->Token), $shareToken->Token);
+        return Controller::join_links(
+            Director::absoluteBaseURL(),
+            'preview',
+            $this->generateKey($shareToken->Token),
+            $shareToken->Token
+        );
     }
 
     /**
@@ -69,7 +83,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
             ))->first();
         }
 
-        $config = Config::inst()->forClass('ShareDraftContentSiteTreeExtension');
+        $config = Config::inst()->forClass(__CLASS__);
 
         $validForDays = $config->valid_for_days;
 

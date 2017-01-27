@@ -1,0 +1,9 @@
+mappings:
+  ShareDraftController: SilverStripe\ShareDraftContent\Controllers\ShareDraftController
+  ShareDraftContentControllerExtension: SilverStripe\ShareDraftContent\Extensions\ShareDraftContentControllerExtension
+  ShareDraftContentRequirementsExtension: SilverStripe\ShareDraftContent\Extensions\ShareDraftContentRequirementsExtension
+  ShareDraftContentSiteTreeExtension: SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension
+  ShareToken: SilverStripe\ShareDraftContent\Models\ShareToken
+  RemoveExpiredShareTokens: SilverStripe\ShareDraftContent\Tasks\RemoveExpiredShareTokens
+  ShareDraftContentSiteTreeExtensionTest: SilverStripe\ShareDraftContent\Tests\ShareDraftContentSiteTreeExtensionTest
+  ShareTokenTest: SilverStripe\ShareDraftContent\Tests\ShareTokenTest
