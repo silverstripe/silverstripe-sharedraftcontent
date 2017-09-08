@@ -6,6 +6,8 @@ php:
 
 sudo: false
 
+dist: precise
+
 env:
   - DB=MYSQL CORE_RELEASE=3.5
 
@@ -26,12 +28,4 @@ before_script:
   - composer install
 
 script:
-  - vendor/bin/phpunit --coverage-clover coverage.clover sharedraftcontent/tests
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - git remote rm origin
-  - git remote add origin git@github.com:silverstripe-labs/silverstripe-sharedraftcontent.git
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-
-branches:
-  only:
-    - master
+  - vendor/bin/phpunit sharedraftcontent/tests

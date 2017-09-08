@@ -15,7 +15,7 @@ This module adds a 'Share draft' action menu to the CMS. This enables Content Au
 
 ## Requirements
 
-- SilverStripe ^3.1
+- SilverStripe ^3.3
 
 ## Installation
 
