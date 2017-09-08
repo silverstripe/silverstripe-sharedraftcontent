@@ -74,7 +74,11 @@ class ShareDraftController extends Controller
                 $_FILES = array(array());
 
                 // Create mock request; Simplify request to single top level request
-                $pageRequest = new SS_HTTPRequest('GET', $page->URLSegment);
+                $pageRequest = Injector::inst()->create('SS_HTTPRequest', 'GET', $page->URLSegment);
+
+                // Extend to allow other modules to modify the request before it's processed
+                $this->extend('updatePageRequest', $pageRequest, $page);
+
                 $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
                 $rendered = $controller->handleRequest($pageRequest, $this->model);
 

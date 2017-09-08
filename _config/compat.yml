@@ -1,0 +1,8 @@
+---
+Name: sharedraftcontentcompatibility
+Only:
+  moduleexists: subsites
+---
+ShareDraftController:
+  extensions:
+    - ShareDraftSubsiteExtension
