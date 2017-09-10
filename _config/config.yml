@@ -14,4 +14,3 @@ Controller:
 Director:
   rules:
     'preview': 'ShareDraftController'
----
