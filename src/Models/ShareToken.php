@@ -45,7 +45,7 @@ class ShareToken extends DataObject
 
         $validForSeconds = (int) $this->ValidForDays * 24 * 60 * 60;
 
-        $nowSeconds = strtotime(DBDatetime::now()->Format("Y-m-d H:i:s"));
+        $nowSeconds = DBDatetime::now()->getTimestamp();
 
         return ($createdSeconds + $validForSeconds) <= $nowSeconds;
     }
