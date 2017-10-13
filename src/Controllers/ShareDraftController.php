@@ -2,6 +2,7 @@
 
 namespace SilverStripe\ShareDraftContent\Controllers;
 
+use BadMethodCallException;
 use Exception;
 use PageController;
 use SilverStripe\CMS\Controllers\ModelAsController;
@@ -9,8 +10,9 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Session;
-use SilverStripe\ORM\Versioning\Versioned;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
+use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
@@ -48,7 +50,12 @@ class ShareDraftController extends Controller
     {
         $key = $request->param('Key');
         $token = $request->param('Token');
-
+        try {
+            $session = $this->getRequest()->getSession();
+        } catch (BadMethodCallException $e) {
+            // Create a new session
+            $session = $this->getRequest()->setSession(Injector::inst()->create(Session::class));
+        }
         /**
          * @var ShareToken $shareToken
          */
@@ -72,16 +79,16 @@ class ShareDraftController extends Controller
             Requirements::css('silverstripe/sharedraftcontent:css/top-bar.css');
 
             // Temporarily un-secure the draft site and switch to draft
-            $oldSecured = Session::get('unsecuredDraftSite');
+            $oldSecured = $session->get('unsecuredDraftSite');
             $oldMode = Versioned::get_reading_mode();
-            $restore = function () use ($oldSecured, $oldMode) {
-                Session::set('unsecuredDraftSite', $oldSecured);
+            $restore = function () use ($oldSecured, $oldMode, $session) {
+                $session->set('unsecuredDraftSite', $oldSecured);
                 Versioned::set_reading_mode($oldMode);
             };
 
             // Process page inside an unsecured draft container
             try {
-                Session::set('unsecuredDraftSite', true);
+                $session->set('unsecuredDraftSite', true);
                 Versioned::set_stage('Stage');
 
                 // Hack to get around ContentController::init() redirecting on home page
@@ -90,6 +97,7 @@ class ShareDraftController extends Controller
                 // Create mock request; Simplify request to single top level request
                 $pageRequest = new HTTPRequest('GET', $page->URLSegment);
                 $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
+                $pageRequest->setSession($session);
                 $rendered = $controller->handleRequest($pageRequest, $this->model);
 
                 // Render draft heading
