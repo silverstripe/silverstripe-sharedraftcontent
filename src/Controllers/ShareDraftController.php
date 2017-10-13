@@ -54,7 +54,9 @@ class ShareDraftController extends Controller
             $session = $this->getRequest()->getSession();
         } catch (BadMethodCallException $e) {
             // Create a new session
-            $session = $this->getRequest()->setSession(Injector::inst()->create(Session::class));
+            $session = $this->getRequest()
+                ->setSession(Injector::inst()->create(Session::class, []))
+                ->getSession();
         }
         /**
          * @var ShareToken $shareToken
