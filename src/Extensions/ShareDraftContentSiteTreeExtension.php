@@ -83,7 +83,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
             ))->first();
         }
 
-        $config = Config::inst()->forClass(__CLASS__);
+        $config = Config::forClass(__CLASS__);
 
         $validForDays = $config->valid_for_days;
 
