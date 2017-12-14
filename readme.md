@@ -1,11 +1,10 @@
 # Share Draft Content
 
-[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://travis-ci.org/silverstripe/silverstripe-sharedraftcontent)
-[![Code Quality](http://img.shields.io/scrutinizer/g/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/silverstripe/silverstripe-sharedraftcontent.svg?style=flat-square)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent)
-[![Version](http://img.shields.io/packagist/v/silverstripe/sharedraftcontent.svg?style=flat-square)](https://packagist.org/packages/silverstripe/silverstripe-sharedraftcontent)
-[![License](http://img.shields.io/packagist/l/silverstripe/sharedraftcontent.svg?style=flat-square)](LICENSE.md)
-![helpfulrobot](https://helpfulrobot.io/silverstripe/sharedraftcontent/badge)
+[![Build Status](https://travis-ci.org/silverstripe/silverstripe-sharedraftcontent.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-sharedraftcontent)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent/?branch=master)
+[![codecov](https://codecov.io/gh/silverstripe/silverstripe-sharedraftcontent/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-sharedraftcontent)
+[![Version](http://img.shields.io/packagist/v/silverstripe/sharedraftcontent.svg?style=flat)](https://packagist.org/packages/silverstripe/silverstripe-sharedraftcontent)
+[![License](http://img.shields.io/packagist/l/silverstripe/sharedraftcontent.svg?style=flat)](LICENSE.md)
 
 Share draft page content with non-CMS users.
 
@@ -17,17 +16,27 @@ This module adds a 'Share draft' action menu to the CMS. This enables Content Au
 
 - SilverStripe ^4.0
 
+Note: this version is compatible with SilverStripe 4. For SilverStripe 3, please see the 1.x release line.
+
 ## Installation
 
-```
+The easiest way to install is by using [Composer](https://getcomposer.org):
+
+```sh
 $ composer require silverstripe/sharedraftcontent
 ```
 
-You'll also need to run `dev/build`.
+You'll also need to run `dev/build`. You should now see a link/button on the bottom-right of edit pages. Clicking the link will generate a new share link.
 
-## Documentation
+# Developer Tools
 
-See the [docs/en](docs/en/introduction.md) folder.
+Get the dependencies by running `npm install`.
+
+After making changes to SCSS files, run the build script `npm run build`. This will compile everything for you and output minified CSS files to the `css` directory.
+
+## Share Links
+
+The generated share links have a public key and hash. There can be any number of share links per-page, but all share links are unique, and cannot be used to gain access to pages other than the one each link was created for.
 
 ## Versioning
 
