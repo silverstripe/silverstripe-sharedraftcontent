@@ -3,8 +3,6 @@
 namespace SilverStripe\ShareDraftContent\Tasks;
 
 use SilverStripe\Dev\BuildTask;
-use SilverStripe\Security\Permission;
-use SilverStripe\Security\Security;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
 
 /**

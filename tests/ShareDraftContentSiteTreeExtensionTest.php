@@ -3,7 +3,6 @@
 namespace SilverStripe\ShareDraftContent\Tests;
 
 use Page;
-use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\ShareDraftContent\Controllers\ShareDraftController;
