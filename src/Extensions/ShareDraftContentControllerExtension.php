@@ -3,7 +3,6 @@
 namespace SilverStripe\ShareDraftContent\Extensions;
 
 use SilverStripe\Core\Extension;
-use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 
 class ShareDraftContentControllerExtension extends Extension
@@ -20,7 +19,7 @@ class ShareDraftContentControllerExtension extends Extension
      */
     public function MakeShareDraftLink()
     {
-        if ($member = Member::currentUser()) {
+        if ($member = Security::getCurrentUser()) {
             if ($this->owner->hasMethod('CurrentPage') && $this->owner->CurrentPage()->canEdit($member)) {
                 return $this->owner->CurrentPage()->ShareTokenLink();
             } elseif ($this->owner->hasMethod('canEdit') && $this->owner->canEdit($member)) {
@@ -36,6 +35,9 @@ class ShareDraftContentControllerExtension extends Extension
      */
     public function getShareDraftLinkAction()
     {
-        return $this->owner->Link('MakeShareDraftLink');
+        if ($this->owner->config()->get('url_segment')) {
+            return $this->owner->Link('MakeShareDraftLink');
+        }
+        return '';
     }
 }
