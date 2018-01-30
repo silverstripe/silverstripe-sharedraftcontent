@@ -9,7 +9,7 @@ class ShareDraftContentRequirementsExtension extends DataExtension
 {
     public function init()
     {
-        Requirements::css('silverstripe/sharedraftcontent:css/share-component.css');
-        Requirements::javascript('silverstripe/sharedraftcontent:javascript/main.js');
+        Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/share-component.css');
+        Requirements::javascript('silverstripe/sharedraftcontent: client/dist/js/main.js');
     }
 }
