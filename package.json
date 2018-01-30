@@ -19,15 +19,11 @@
   },
   "devDependencies": {
     "@silverstripe/webpack-config": "^0.5.0",
+    "@silverstripe/eslint-config": "",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.1",
-    "eslint": "^4.6.1",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.7.0",
     "webpack": "^2.6.1"
   },
   "scripts": {
@@ -37,6 +33,6 @@
     "lint": "eslint client/src; sass-lint -v"
   },
   "engines": {
-    "node": "^6.x"
+    "node": ">=6.x"
   }
 }
