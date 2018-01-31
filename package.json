@@ -2,26 +2,37 @@
   "name": "sharedraftcontent",
   "version": "2.0.0",
   "description": "Share draft page content with non-CMS users",
-  "devDependencies": {
-    "clean-css": "^3.2.8",
-    "node-sass": "^3.0.0"
-  },
-  "scripts": {
-    "build:errorpage": "node-sass scss/error-page.scss | cleancss --skip-shorthand-compacting --output css/error-page.css",
-    "build:sharecomponent": "node-sass scss/share-component.scss | cleancss --skip-shorthand-compacting --output css/share-component.css",
-    "build:topbar": "node-sass scss/top-bar.scss | cleancss --skip-shorthand-compacting --output css/top-bar.css",
-    "build": "npm run build:errorpage && npm run build:sharecomponent && npm run build:topbar"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent.git"
-  },
   "keywords": [
     "SilverStripe"
   ],
   "license": "BSD-3-Clause",
+  "homepage": "https://github.com/silverstripe/silverstripe-sharedraftcontent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent.git"
+  },
   "bugs": {
     "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent/issues"
   },
-  "homepage": "https://github.com/silverstripe/silverstripe-sharedraftcontent"
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "@silverstripe/webpack-config": "^0.5.0",
+    "@silverstripe/eslint-config": "^0.0.4",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.1",
+    "webpack": "^2.6.1"
+  },
+  "scripts": {
+    "build": "yarn && NODE_ENV=production webpack -p --bail --progress",
+    "watch": "yarn && NODE_ENV=development webpack --watch --progress",
+    "css": "WEBPACK_CHILD=css npm run build",
+    "lint": "eslint client/src; sass-lint -v"
+  },
+  "engines": {
+    "node": ">=6.x"
+  }
 }

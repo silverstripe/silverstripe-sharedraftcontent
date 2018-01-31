@@ -2,6 +2,8 @@
 # please see the EditorConfig documentation:
 # http://editorconfig.org
 
+root = true
+
 [*]
 charset = utf-8
 end_of_line = lf
@@ -10,8 +12,11 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{*.yml,package.json}]
+[{*.{yml,js,jsx,json,css,scss,eslintrc}}]
 indent_size = 2
 
 # The indent size used in the package.json file cannot be changed:
 # https://github.com/npm/npm/pull/3180#issuecomment-16336516
+
+[composer.json]
+indent_size = 4

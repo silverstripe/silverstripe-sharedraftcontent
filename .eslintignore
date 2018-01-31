@@ -1,0 +1,8 @@
+# Ignore dist files
+client/dist/
+
+# Ignore vendor
+node_modules/
+
+# Ignore language files (auto-generated)
+client/lang/
