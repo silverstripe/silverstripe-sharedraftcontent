@@ -8,11 +8,6 @@ use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\ShareDraftContent\Controllers\ShareDraftController;
 use SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension;
 
-/**
- * @mixin PHPUnit_Framework_TestCase
- *
- * @package shareddraftcontent
- */
 class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
 {
     /**
@@ -27,20 +22,14 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
          * these values are not the same.
          */
 
-        Page::add_extension(ShareDraftContentSiteTreeExtension::class);
-
-        /**
-         * @var Page $firstSharedPage
-         */
+        /** @var Page|ShareDraftContentSiteTreeExtension $firstSharedPage */
         $firstSharedPage = $this->objFromFixture(Page::class, 'FirstSharedPage');
 
         $firstShareLink = $firstSharedPage->ShareTokenLink();
 
         $this->assertNotEmpty($firstSharedPage->ShareTokenSalt);
 
-        /**
-         * @var page $secondSharedPage
-         */
+        /** @var Page|ShareDraftContentSiteTreeExtension $secondSharedPage */
         $secondSharedPage = $this->objFromFixture(Page::class, 'SecondSharedPage');
 
         $secondShareLink = $secondSharedPage->ShareTokenLink();
@@ -48,6 +37,12 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
         $this->assertNotEmpty($secondSharedPage->ShareTokenSalt);
 
         $this->assertNotEquals($firstShareLink, $secondShareLink);
+
+        // Ensure that salt between two pages causes key to differ for null token
+        $this->assertNotEquals(
+            $firstSharedPage->generateKey(null),
+            $secondSharedPage->generateKey(null)
+        );
 
         /**
          * Then we get the underlying token and send a preview request. With a valid key and token,
@@ -58,6 +53,12 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
         $firstSharedPageToken = $firstSharedPage->ShareTokens()->first();
 
         $this->assertNotEmpty($firstSharedPageToken);
+
+        // Ensure that salt between two pages causes key to differ for either token
+        $this->assertNotEquals(
+            $firstSharedPage->generateKey($firstSharedPageToken->Token),
+            $secondSharedPage->generateKey($firstSharedPageToken->Token)
+        );
 
         $parts = explode('/', $firstShareLink);
 
@@ -73,8 +74,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
             'Key' => $key,
         ));
 
-        $controller = new ShareDraftController($firstSharedPage);
-
+        $controller = new ShareDraftController();
         $response = $controller->preview($request);
 
         $this->assertContains('share-draft-content-message', $response);
@@ -86,8 +86,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
             'Key' => '',
         ));
 
-        $controller = new ShareDraftController($firstSharedPage);
-
+        $controller = new ShareDraftController();
         $response = $controller->preview($request);
 
         $this->assertContains('share-draft-error-page', $response);

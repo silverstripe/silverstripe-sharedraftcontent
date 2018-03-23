@@ -6,11 +6,6 @@ use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
 
-/**
- * @mixin PHPUnit_Framework_TestCase
- *
- * @package shareddraftcontent
- */
 class ShareTokenTest extends FunctionalTest
 {
     /**
