@@ -2,15 +2,19 @@
 
 namespace SilverStripe\ShareDraftContent\Extensions;
 
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\HasManyList;
 use SilverStripe\Security\RandomGenerator;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
 
 /**
- * @mixin SiteTree
+ * @property SiteTree|ShareDraftContentSiteTreeExtension $owner
+ * @property string $ShareTokenSalt
+ * @method HasManyList|ShareToken[] ShareTokens()
  */
 class ShareDraftContentSiteTreeExtension extends DataExtension
 {
@@ -85,7 +89,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
 
         $config = Config::forClass(__CLASS__);
 
-        $validForDays = $config->valid_for_days;
+        $validForDays = $config->get('valid_for_days');
 
         $token = ShareToken::create(array(
             "Token" => $token,
@@ -115,7 +119,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
      */
     public function generateKey($salt)
     {
-        return hash_pbkdf2('sha256', $salt, $this->owner->SharedTokenSalt, 1000, 16);
+        return hash_pbkdf2('sha256', $salt, $this->owner->ShareTokenSalt, 1000, 16);
     }
 
     /**
