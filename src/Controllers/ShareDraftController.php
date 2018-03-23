@@ -3,14 +3,16 @@
 namespace SilverStripe\ShareDraftContent\Controllers;
 
 use BadMethodCallException;
-use Exception;
 use PageController;
+use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
@@ -44,7 +46,7 @@ class ShareDraftController extends Controller
     /**
      * @param HTTPRequest $request
      *
-     * @return string|HTMLText
+     * @return string|DBHTMLText
      */
     public function preview(HTTPRequest $request)
     {
@@ -58,20 +60,16 @@ class ShareDraftController extends Controller
                 ->setSession(Injector::inst()->create(Session::class, []))
                 ->getSession();
         }
-        /**
-         * @var ShareToken $shareToken
-         */
+        /** @var ShareToken $shareToken */
         $shareToken = ShareToken::get()->filter('Token', $token)->first();
 
         if (!$shareToken) {
             return $this->errorPage();
         }
 
-        $page = Versioned::get_one_by_stage(
-            SiteTree::class,
-            'Stage',
-            sprintf('"SiteTree"."ID" = \'%d\'', $shareToken->PageID)
-        );
+        /** @var SiteTree|ShareDraftContentSiteTreeExtension $page */
+        $page = Versioned::get_by_stage(SiteTree::class, Versioned::DRAFT)
+            ->byID($shareToken->PageID);
 
         $latest = Versioned::get_latest_version(SiteTree::class, $shareToken->PageID);
 
@@ -81,16 +79,12 @@ class ShareDraftController extends Controller
             Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/top-bar.css');
 
             // Temporarily un-secure the draft site and switch to draft
-            $oldSecured = $session->get('unsecuredDraftSite');
+            $oldSecured = $this->getIsDraftSecured($session);
             $oldMode = Versioned::get_reading_mode();
-            $restore = function () use ($oldSecured, $oldMode, $session) {
-                $session->set('unsecuredDraftSite', $oldSecured);
-                Versioned::set_reading_mode($oldMode);
-            };
 
             // Process page inside an unsecured draft container
             try {
-                $session->set('unsecuredDraftSite', true);
+                $this->setIsDraftSecured($session, false);
                 Versioned::set_stage('Stage');
 
                 // Hack to get around ContentController::init() redirecting on home page
@@ -100,7 +94,7 @@ class ShareDraftController extends Controller
                 $pageRequest = new HTTPRequest('GET', $page->URLSegment);
                 $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
                 $pageRequest->setSession($session);
-                $rendered = $controller->handleRequest($pageRequest, $this->model);
+                $rendered = $controller->handleRequest($pageRequest);
 
                 // Render draft heading
                 $data = new ArrayData(array(
@@ -108,11 +102,10 @@ class ShareDraftController extends Controller
                     'Latest' => $latest,
                 ));
                 $include = (string) $data->renderWith('Includes/TopBar');
-            } catch (Exception $ex) {
-                $restore();
-                throw $ex;
+            } finally {
+                $this->setIsDraftSecured($session, $oldSecured);
+                Versioned::set_reading_mode($oldMode);
             }
-            $restore();
 
             return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
         } else {
@@ -121,22 +114,54 @@ class ShareDraftController extends Controller
     }
 
     /**
-     * @return HTMLText
+     * @return DBHTMLText
      */
     protected function errorPage()
     {
         Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/error-page.css');
-
         return $this->renderWith('ShareDraftContentError');
     }
 
     /**
-     * @param mixed $page
-     *
-     * @return mixed
+     * @param SiteTree $page
+     * @return ContentController
      */
     protected function getControllerFor($page)
     {
         return ModelAsController::controller_for($page);
+    }
+
+    /**
+     * Check if the draft site is secured
+     *
+     * @param Session $session
+     * @return bool True if the draft site is secured
+     */
+    protected function getIsDraftSecured(Session $session)
+    {
+        // Versioned >=1.2
+        if (method_exists(Versioned::class, 'get_draft_site_secured')) {
+            return Versioned::get_draft_site_secured();
+        }
+
+        // Fall back to session
+        return !$session->get('unsecuredDraftSite');
+    }
+
+    /**
+     * Set draft site security
+     *
+     * @param Session $session
+     * @param bool $secured True if draft site should be secured
+     */
+    protected function setIsDraftSecured(Session $session, $secured)
+    {
+        // Versioned >=1.2
+        if (method_exists(Versioned::class, 'set_draft_site_secured')) {
+            Versioned::set_draft_site_secured($secured);
+        }
+
+        // Set session variable anyway
+        $session->set('unsecuredDraftSite', !$secured);
     }
 }
