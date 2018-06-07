@@ -58,17 +58,22 @@ class ShareDraftController extends Controller
             Requirements::css(SHAREDRAFTCONTENT_DIR . '/css/top-bar.css');
 
             // Temporarily un-secure the draft site and switch to draft
-            $oldSecured = Session::get('unsecuredDraftSite');
+            $oldSecured = Versioned::get_draft_site_secured();
+            $oldSecuredSession = Session::get('unsecuredDraftSite');
             $oldMode = Versioned::get_reading_mode();
-            $restore = function () use ($oldSecured, $oldMode) {
-                Session::set('unsecuredDraftSite', $oldSecured);
+            $restore = function () use ($oldSecured, $oldMode, $oldSecuredSession) {
                 Versioned::set_reading_mode($oldMode);
+                Versioned::set_default_reading_mode(null);
+                Versioned::set_draft_site_secured($oldSecured);
+                Session::set('unsecuredDraftSite', $oldSecuredSession);
             };
 
             // Process page inside an unsecured draft container
             try {
                 Session::set('unsecuredDraftSite', true);
                 Versioned::reading_stage('Stage');
+                Versioned::set_default_reading_mode(Versioned::get_reading_mode());
+                Versioned::set_draft_site_secured(false);
 
                 // Hack to get around ContentController::init() redirecting on home page
                 $_FILES = array(array());
