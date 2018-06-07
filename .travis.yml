@@ -9,16 +9,14 @@ sudo: false
 dist: precise
 
 env:
-  - DB=MYSQL CORE_RELEASE=3.5
+  - DB=MYSQL CORE_RELEASE=3.7
 
 matrix:
   include:
     - php: 5.5
       env: DB=PGSQL CORE_RELEASE=3
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.3
     - php: 7.1
-      env: DB=MYSQL CORE_RELEASE=3.6
+      env: DB=MYSQL CORE_RELEASE=3.7
 
 before_script:
   - composer self-update || true
