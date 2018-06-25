@@ -1,36 +1,34 @@
 {
-	"name": "silverstripe/sharedraftcontent",
-	"type": "silverstripe-module",
-	"description": "Share draft page content with non-CMS users",
-	"license": "BSD-3-Clause",
-	"keywords": ["silverstripe"],
-	"authors": [
-		{
-			"name": "Damian Mooyman",
-			"email": "damian.mooyman@gmail.com"
-		},
-		{
-			"name": "Christopher Pitt",
-			"email": "chris@silverstripe.com"
-		},
-		{
-			"name": "David Craig",
-			"email": "david@silverstripe.com"
-		}
-	],
-	"require": {
-		"silverstripe/framework": "^3.7",
-		"silverstripe/cms": "^3.7",
-		"assertchris/hash-compat": "^1.0"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "^4.7"
-	},
-	"extra": {
-		"branch-alias": {
-			"1.x-dev": "1.3.x-dev"
-		}
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true
+    "name": "silverstripe/sharedraftcontent",
+    "type": "silverstripe-module",
+    "description": "Share draft page content with non-CMS users",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "silverstripe"
+    ],
+    "authors": [
+        {
+            "name": "Damian Mooyman",
+            "email": "damian.mooyman@gmail.com"
+        },
+        {
+            "name": "Christopher Pitt",
+            "email": "chris@silverstripe.com"
+        },
+        {
+            "name": "David Craig",
+            "email": "david@silverstripe.com"
+        }
+    ],
+    "require": {
+        "silverstripe/framework": "^3.7",
+        "silverstripe/cms": "^3.7",
+        "assertchris/hash-compat": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "extra": [],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
