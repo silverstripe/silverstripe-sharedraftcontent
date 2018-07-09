@@ -1,5 +1,4 @@
 const Path = require('path');
-// Import the core config
 const webpackConfig = require('@silverstripe/webpack-config');
 const {
   resolveJS,
@@ -17,14 +16,13 @@ const PATHS = {
   ROOT: Path.resolve(),
   SRC: Path.resolve('client/src'),
   DIST: Path.resolve('client/dist'),
-  LEGACY_SRC: Path.resolve('client/src/legacy'),
 };
 
 const config = [
   {
     name: 'js',
     entry: {
-      main: `${PATHS.SRC}/js/main.js`,
+      bundle: `${PATHS.SRC}/bundles/bundle.js`,
     },
     output: {
       path: PATHS.DIST,
@@ -34,13 +32,13 @@ const config = [
     resolve: resolveJS(ENV, PATHS),
     externals: externalJS(ENV, PATHS),
     module: moduleJS(ENV, PATHS),
+    plugins: pluginJS(ENV, PATHS),
   },
   {
     name: 'css',
     entry: {
-      "error-page": `${PATHS.SRC}/styles/error-page.scss`,
-      "top-bar": `${PATHS.SRC}/styles/top-bar.scss`,
-      "share-component": `${PATHS.SRC}/styles/share-component.scss`,
+      'bundle-cms': `${PATHS.SRC}/styles/bundle-cms.scss`,
+      'bundle-frontend': `${PATHS.SRC}/styles/bundle-frontend.scss`,
     },
     output: {
       path: PATHS.DIST,
@@ -52,4 +50,7 @@ const config = [
   },
 ];
 
-module.exports = config;
+// Use WEBPACK_CHILD=js or WEBPACK_CHILD=css env var to run a single config
+module.exports = (process.env.WEBPACK_CHILD)
+  ? config.find((entry) => entry.name === process.env.WEBPACK_CHILD)
+  : module.exports = config;
