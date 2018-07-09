@@ -31,7 +31,7 @@
             "dev-master": "2.x-dev"
         },
         "expose": [
-            "client/dist/"
+            "client/dist"
         ]
     },
     "autoload": {

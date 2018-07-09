@@ -20,13 +20,10 @@
     "node": ">=6.x"
   },
   "scripts": {
-    "build": "yarn && yarn lint && yarn test && NODE_ENV=production webpack -p --bail --progress",
+    "build": "yarn && yarn lint && NODE_ENV=production webpack -p --bail --progress",
     "dev": "NODE_ENV=development webpack --progress",
     "watch": "NODE_ENV=development webpack --watch --progress",
     "css": "WEBPACK_CHILD=css npm run build",
-    "test": "jest",
-    "coverage": "jest --coverage",
-    "lock": "npm-shrinkwrap --dev",
     "lint": "eslint client/src && sass-lint client/src",
     "lint-js": "eslint client/src",
     "lint-js-fix": "eslint client/src --fix",
@@ -35,6 +32,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^3.2.16",
     "@storybook/react": "^3.2.16",
+    "isomorphic-fetch": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz",
     "jquery": "^3.2.1",
     "react": "15.3.1",
     "react-dom": "15.3.1"

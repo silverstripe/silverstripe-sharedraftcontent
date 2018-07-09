@@ -1,4 +1,5 @@
 import jQuery from 'jquery';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { loadComponent } from 'lib/Injector';
 
@@ -7,18 +8,17 @@ import { loadComponent } from 'lib/Injector';
  * outside of a React context e.g. in the CMS
  */
 jQuery.entwine('ss', ($) => {
-  $('.js-injector-boot .history-viewer__container').entwine({
+  $('.js-injector-boot .cms-preview .share-draft-content__placeholder').entwine({
     onmatch() {
       const cmsContent = this.closest('.cms-content').attr('id');
       const context = (cmsContent)
         ? { context: cmsContent }
         : {};
-
       const ShareDraftContentComponent = loadComponent('ShareDraftContent', context);
 
       ReactDOM.render(
         <ShareDraftContentComponent
-          url={"http://google.com"}
+          generateLinkUrl={this.data('url')}
           contextKey={this.data('context-key')}
         />,
         this[0]
