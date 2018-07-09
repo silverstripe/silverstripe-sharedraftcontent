@@ -18,7 +18,10 @@ jQuery.entwine('ss', ($) => {
 
       ReactDOM.render(
         <ShareDraftContentComponent
-          generateLinkUrl={this.data('url')}
+          links={{
+            generateLink: this.data('url'),
+            learnMore: this.data('helpurl'),
+          }}
           contextKey={this.data('context-key')}
         />,
         this[0]

@@ -1,12 +1,10 @@
-<div id="$SelectID" class="preview-mode-selector preview-selector field dropdown">
-    <div class="share-draft-content__placeholder"
-        <% if $CurrentPage.ShareDraftLinkAction %>
-            data-url="{$CurrentPage.ShareDraftLinkAction}"
-        <% else %>
-            data-url="{$Controller.CurrentPage.ShareDraftLinkAction}"
-        <% end_if %>
+<span id="$SelectID" class="preview-mode-selector preview-selector field dropdown">
+    <%-- Placeholder is re-rendered by the ShareDraftContent React component --%>
+    <span class="share-draft-content__placeholder"
+        data-url="<% if $CurrentPage.ShareDraftLinkAction %>{$CurrentPage.ShareDraftLinkAction}<% else %>{$Controller.CurrentPage.ShareDraftLinkAction}<% end_if %>"
+        data-helpurl="https://github.com/silverstripe/silverstripe-sharedraftcontent/blob/master/docs/en/userguide/index.md"
     >
-    </div>
+    </span>
 
     <%-- Note: copy and paste from LeftAndMain_ViewModeSelector in silverstripe/admin module --%>
     <select title="<%t SilverStripe\\Admin\\LeftAndMain_ViewModeSelector.ChangeViewMode 'Change view mode' %>" id="$SelectID-select" class="preview-dropdown dropdown form-group--no-label no-change-track" autocomplete="off" name="Action">
@@ -18,4 +16,4 @@
 			<option data-icon="icon-window" class="icon-window icon-view last" value="window"><%t SilverStripe\\Admin\\LeftAndMain_ViewModeSelector.DualWindowView 'Dual Window' %></option>
 		-->
 	</select>
-</div>
+</span>

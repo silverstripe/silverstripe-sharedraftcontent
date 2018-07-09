@@ -32,6 +32,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^3.2.16",
     "@storybook/react": "^3.2.16",
+    "classnames": "^2.2.6",
     "isomorphic-fetch": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz",
     "jquery": "^3.2.1",
     "react": "15.3.1",

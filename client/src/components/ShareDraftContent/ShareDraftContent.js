@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 import i18n from 'i18n';
 import fetch from 'isomorphic-fetch';
 import { inject } from 'lib/Injector';
@@ -21,15 +22,6 @@ class ShareDraftContent extends Component {
   }
 
   /**
-   * Returns the URL for the "learn more" link
-   *
-   * @returns {string}
-   */
-  getLearnMoreLink() {
-    return this.props.learnMoreUrl;
-  }
-
-  /**
    * Do nothing, workaround for un/controlled component warnings in React
    */
   handleInputChange() {
@@ -37,7 +29,9 @@ class ShareDraftContent extends Component {
   }
 
   /**
-   * What to do when the share draft link input is clicked
+   * What to do when the "Share" button is clicked and the popover is opened. If it's already
+   * loaded then the link should be selected, otherwise it should generate (and then select)
+   * the link.
    */
   handleToggle() {
     const { isLoaded } = this.state;
@@ -55,9 +49,9 @@ class ShareDraftContent extends Component {
    * completed.
    */
   generateShareDraftLink() {
-    const { generateLinkUrl } = this.props;
+    const { links: { generateLink } } = this.props;
 
-    return fetch(generateLinkUrl, { credentials: 'same-origin' })
+    return fetch(generateLink, { credentials: 'same-origin' })
       .then(response => response.text())
       .then(
         (response) => {
@@ -105,51 +99,88 @@ class ShareDraftContent extends Component {
     );
   }
 
-  render() {
-    const { PopoverField } = this.props;
+  /**
+   * Renders a help information paragraph with an optional link to learn more via userhelp
+   * if the URL is defined or passed in.
+   *
+   * @returns {Object}
+   */
+  renderHelp() {
+    const { links: { learnMore } } = this.props;
+
+    return (
+      <p>
+        {i18n._t(
+          'ShareDraftContent.DESCRIPTION',
+          'Anyone with this link can view the draft version of this page.'
+        )} {learnMore && <a
+          href={learnMore}
+          className="share-draft-content__learn-more"
+          target="_blank"
+          rel="noopener"
+        >
+          {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
+        </a>}
+      </p>
+    );
+  }
+
+  /**
+   * Renders a disabled input field which will display the share draft link once it is generated
+   *
+   * @returns {Object}
+   */
+  renderLink() {
     const { previewUrl } = this.state;
+
+    return (
+      <div className="share-draft-content__link-container">
+        <input
+          type="text"
+          className="share-draft-content__link form-control"
+          title={i18n._t('ShareDraftContent.LINK_HELP', 'Link to share draft content')}
+          value={previewUrl}
+          onChange={this.handleInputChange}
+          ref={(linkRef) => { this.linkRef = linkRef; }}
+          readOnly
+        />
+      </div>
+    );
+  }
+
+  /**
+   * Renders the popover field with the share draft contents inside it
+   *
+   * @returns {Object}
+   */
+  render() {
+    const {
+      PopoverField,
+      className,
+      button,
+      popover,
+    } = this.props;
 
     const popoverProps = {
       id: 'share-draft-content',
-      buttonClassName: 'font-icon-share',
-      title: i18n._t('ShareDraftContent.SHARE', 'Share'),
+      buttonClassName: button.className,
+      title: button.title,
       data: {
-        popoverTitle: i18n._t('ShareDraftContent.SHARE_DRAFT_CONTENT', 'Share draft content'),
-        buttonTooltip: i18n._t('ShareDraftContent.SHARE_DRAFT_CONTENT', 'Share draft content'),
+        popoverTitle: popover.title,
+        buttonTooltip: button.tooltip,
         placement: 'top',
       },
       toggleCallback: this.handleToggle,
     };
 
+    const containerClassName = classnames('share-draft-content__container', className);
+
     return (
-      <div className="share-draft-content__container">
+      <div className={containerClassName}>
         <PopoverField {...popoverProps}>
           { this.renderError() }
-          <p>
-            {i18n._t(
-              'ShareDraftContent.DESCRIPTION',
-              'Anyone with this link can view the draft version of this page.'
-            )} <a
-              href={this.getLearnMoreLink()}
-              className="share-draft-content__learn-more"
-              target="_blank"
-              rel="noopener"
-            >
-              {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
-            </a>
-          </p>
-
-          <div className="share-draft-content__link-container">
-            <input
-              type="text"
-              className="share-draft-content__link form-control"
-              title={i18n._t('ShareDraftContent.LINK_HELP', 'Link to share draft content')}
-              value={previewUrl}
-              onChange={this.handleInputChange}
-              ref={(linkRef) => { this.linkRef = linkRef; }}
-              readOnly
-            />
-          </div>
+          { this.renderHelp() }
+          { this.renderLink() }
         </PopoverField>
       </div>
     );
@@ -157,13 +188,35 @@ class ShareDraftContent extends Component {
 }
 
 ShareDraftContent.propTypes = {
-  generateLinkUrl: PropTypes.string.isRequired,
-  learnMoreUrl: PropTypes.string,
+  className: PropTypes.string,
+  button: PropTypes.shape({
+    className: PropTypes.string,
+    title: PropTypes.string,
+    tooltip: PropTypes.string,
+  }),
+  popover: PropTypes.shape({
+    title: PropTypes.string,
+  }),
+  links: PropTypes.shape({
+    generateLink: PropTypes.string.isRequired,
+    learnMore: PropTypes.string,
+  }),
   PopoverField: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 ShareDraftContent.defaultProps = {
-  learnMoreUrl: 'https://google.com/testing',
+  button: {
+    className: 'font-icon-share',
+    title: i18n._t('ShareDraftContent.SHARE', 'Share'),
+    tooltip: i18n._t('ShareDraftContent.SHARE_DRAFT_CONTENT', 'Share draft content'),
+  },
+  popover: {
+    title: i18n._t('ShareDraftContent.SHARE_DRAFT_CONTENT', 'Share draft content'),
+  },
+  links: {
+    learnMore: '',
+  },
+  popoverIcon: 'font-icon-share',
 };
 
 export { ShareDraftContent as Component };
