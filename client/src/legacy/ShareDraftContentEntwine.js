@@ -8,7 +8,7 @@ import { loadComponent } from 'lib/Injector';
  * outside of a React context e.g. in the CMS
  */
 jQuery.entwine('ss', ($) => {
-  $('.js-injector-boot .cms-preview .share-draft-content__placeholder').entwine({
+  $('.js-injector-boot .share-draft-content__placeholder').entwine({
     onmatch() {
       const cmsContent = this.closest('.cms-content').attr('id');
       const context = (cmsContent)
@@ -16,13 +16,17 @@ jQuery.entwine('ss', ($) => {
         : {};
       const ShareDraftContentComponent = loadComponent('ShareDraftContent', context);
 
+      // Get a piece of context for whether the button is in the "edit" or "split"/"preview"
+      // part of the CMS
+      const contextKey = this.closest('.cms-preview').length > 0 ? 'preview' : 'edit';
+
       ReactDOM.render(
         <ShareDraftContentComponent
+          id={`share-draft-content-${contextKey}`}
           links={{
             generateLink: this.data('url'),
             learnMore: this.data('helpurl'),
           }}
-          contextKey={this.data('context-key')}
         />,
         this[0]
       );

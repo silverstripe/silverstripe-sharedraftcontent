@@ -155,6 +155,7 @@ class ShareDraftContent extends Component {
    */
   render() {
     const {
+      id,
       PopoverField,
       className,
       button,
@@ -162,7 +163,7 @@ class ShareDraftContent extends Component {
     } = this.props;
 
     const popoverProps = {
-      id: 'share-draft-content',
+      id,
       buttonClassName: button.className,
       title: button.title,
       data: {
@@ -188,6 +189,7 @@ class ShareDraftContent extends Component {
 }
 
 ShareDraftContent.propTypes = {
+  id: PropTypes.string.isRequired,
   className: PropTypes.string,
   button: PropTypes.shape({
     className: PropTypes.string,
@@ -205,6 +207,7 @@ ShareDraftContent.propTypes = {
 };
 
 ShareDraftContent.defaultProps = {
+  id: 'share-draft-content',
   button: {
     className: 'font-icon-share',
     title: i18n._t('ShareDraftContent.SHARE', 'Share'),
