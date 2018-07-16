@@ -2,6 +2,7 @@
   "name": "sharedraftcontent",
   "version": "2.0.0",
   "description": "Share draft page content with non-CMS users",
+  "main": "./client/src/boot/index.js",
   "keywords": [
     "SilverStripe"
   ],
@@ -14,25 +15,42 @@
   "bugs": {
     "url": "https://github.com/silverstripe/silverstripe-sharedraftcontent/issues"
   },
-  "dependencies": {
-    "jquery": "^3.2.1"
-  },
-  "devDependencies": {
-    "@silverstripe/webpack-config": "^0.5.0",
-    "@silverstripe/eslint-config": "^0.0.4",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.6.0",
-    "css-loader": "^0.28.1",
-    "webpack": "^2.6.1"
-  },
-  "scripts": {
-    "build": "yarn && NODE_ENV=production webpack -p --bail --progress",
-    "watch": "yarn && NODE_ENV=development webpack --watch --progress",
-    "css": "WEBPACK_CHILD=css npm run build",
-    "lint": "eslint client/src; sass-lint -v"
-  },
+  "author": "SilverStripe Ltd",
   "engines": {
     "node": ">=6.x"
+  },
+  "scripts": {
+    "build": "yarn && yarn lint && NODE_ENV=production webpack -p --bail --progress",
+    "dev": "NODE_ENV=development webpack --progress",
+    "watch": "NODE_ENV=development webpack --watch --progress",
+    "css": "WEBPACK_CHILD=css npm run build",
+    "lint": "eslint client/src && sass-lint client/src",
+    "lint-js": "eslint client/src",
+    "lint-js-fix": "eslint client/src --fix",
+    "lint-sass": "sass-lint client/src"
+  },
+  "dependencies": {
+    "@storybook/addon-actions": "^3.2.16",
+    "@storybook/react": "^3.2.16",
+    "classnames": "^2.2.6",
+    "isomorphic-fetch": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz",
+    "jquery": "^3.2.1",
+    "react": "15.3.1",
+    "react-dom": "15.3.1"
+  },
+  "devDependencies": {
+    "@silverstripe/eslint-config": "^0.0.2",
+    "@silverstripe/webpack-config": "^0.8.0",
+    "expose-loader": "^0.7.4",
+    "sass-loader": "^6.0.7"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }

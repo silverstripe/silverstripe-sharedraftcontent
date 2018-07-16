@@ -1,0 +1,33 @@
+// Undoing tab style block link formatting from core
+.share-draft-content__container {
+  .popover-field .popover-body a {
+    color: $link-color;
+    display: inline;
+    padding: 0;
+
+    &:hover {
+      background-color: inherit;
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Add the external link icon after the "learn more" link
+.share-draft-content__learn-more::after {
+  font-family: 'silverstripe';
+  // font-icon-external-link
+  content: '@';
+  margin-left: 5px;
+}
+
+.share-draft-content__link {
+  margin-bottom: 2px;
+  width: 230px;
+}
+
+// Ensure that the placeholder element has some width before the React element is rendered.
+// This prevents the CMS window from expanding by the width of the rendered element afterwards.
+.share-draft-content__placeholder {
+  min-width: 70px;
+}

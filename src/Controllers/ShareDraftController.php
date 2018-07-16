@@ -76,7 +76,7 @@ class ShareDraftController extends Controller
         $controller = $this->getControllerFor($page);
 
         if (!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
-            Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/top-bar.css');
+            Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
 
             // Temporarily un-secure the draft site and switch to draft
             $oldSecured = $this->getIsDraftSecured($session);
@@ -118,7 +118,7 @@ class ShareDraftController extends Controller
      */
     protected function errorPage()
     {
-        Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/error-page.css');
+        Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
         return $this->renderWith('ShareDraftContentError');
     }
 
