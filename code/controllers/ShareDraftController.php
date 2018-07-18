@@ -32,6 +32,9 @@ class ShareDraftController extends Controller
      */
     public function preview(SS_HTTPRequest $request)
     {
+        // Ensure this URL doesn't get picked up by HTTP caches
+        HTTPCacheControl::singleton()->disableCache();
+
         $key = $request->param('Key');
         $token = $request->param('Token');
 
