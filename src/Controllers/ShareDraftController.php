@@ -9,6 +9,7 @@ use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\Middleware\HTTPCacheControlMiddleware;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\FieldType\DBHTMLText;
@@ -50,6 +51,9 @@ class ShareDraftController extends Controller
      */
     public function preview(HTTPRequest $request)
     {
+        // Ensure this URL doesn't get picked up by HTTP caches
+        HTTPCacheControlMiddleware::singleton()->disableCache();
+
         $key = $request->param('Key');
         $token = $request->param('Token');
         try {
