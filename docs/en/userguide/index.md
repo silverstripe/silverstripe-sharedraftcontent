@@ -7,7 +7,7 @@ The [Share draft content](https://github.com/silverstripe/silverstripe-sharedraf
 
 This enables CMS users to generate a private link which can be shared securely with anyone. Each preview link is valid for 30 days.
 
-![Share draft content CMS view](../images/share_draft_popover.png)
+![Share draft content CMS view](_images/share_draft_popover.png)
 
 ## Viewing the shared draft page
 
@@ -17,7 +17,6 @@ Navigating to the shared link will allow you to view the draft state of the pag
 
 Pages appear in two states:
 * Draft state contains content which is yet to be published. While viewing draft pages, a message will appear to inform you of this.
-
 * Published state contains content which has been published. As a result, you will not be notified of this, and will see the live version of the site.
 
-![Share draft content front-end alert](../images/share_draft_frontend.png) <!-- to do update images when UI has been updated -->
+![Share draft content front-end alert](_images/share_draft_frontend.png) <!-- to do update images when UI has been updated -->
