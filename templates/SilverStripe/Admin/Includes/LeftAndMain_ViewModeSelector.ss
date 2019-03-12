@@ -2,7 +2,7 @@
     <%-- Placeholder is re-rendered by the ShareDraftContent React component --%>
     <span class="share-draft-content__placeholder"
         data-url="<% if $CurrentPage.ShareDraftLinkAction %>{$CurrentPage.ShareDraftLinkAction}<% else %>{$Controller.CurrentPage.ShareDraftLinkAction}<% end_if %>"
-        data-helpurl="https://github.com/silverstripe/silverstripe-sharedraftcontent/blob/master/docs/en/userguide/index.md"
+        data-helpurl="https://userhelp.silverstripe.org/en/4/optional_features/share_draft_content"
     >
     </span>
 

@@ -17,7 +17,7 @@ body {
 	padding: 13px 0;
 	background-color: #fff;
 	box-sizing: border-box;
-	z-index: 999999;
+	z-index: 90000;
 
 	@include topbar-small {
 		height: 52px;
