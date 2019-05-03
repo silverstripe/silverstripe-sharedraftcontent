@@ -1,6 +1,6 @@
 {
   "name": "sharedraftcontent",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "description": "Share draft page content with non-CMS users",
   "main": "./client/src/boot/index.js",
   "keywords": [
@@ -17,7 +17,7 @@
   },
   "author": "SilverStripe Ltd",
   "engines": {
-    "node": ">=6.x"
+    "node": ">=10.x"
   },
   "scripts": {
     "build": "yarn && yarn lint && NODE_ENV=production webpack -p --bail --progress",
@@ -30,17 +30,18 @@
     "lint-sass": "sass-lint client/src"
   },
   "dependencies": {
-    "@storybook/addon-actions": "^3.2.16",
-    "@storybook/react": "^3.2.16",
     "classnames": "^2.2.6",
-    "isomorphic-fetch": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
-    "react": "15.3.1",
-    "react-dom": "15.3.1"
+    "prop-types": "^15.6.2",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
   },
   "devDependencies": {
-    "@silverstripe/eslint-config": "^0.0.2",
-    "@silverstripe/webpack-config": "^0.8.0",
+    "@silverstripe/eslint-config": "^0.0.5",
+    "@silverstripe/webpack-config": "^1.0.0",
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/react": "^3.4.10",
     "expose-loader": "^0.7.4",
     "sass-loader": "^6.0.7"
   },
