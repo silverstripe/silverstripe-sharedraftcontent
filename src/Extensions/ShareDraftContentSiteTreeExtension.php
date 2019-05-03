@@ -70,7 +70,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
     {
         if (!$this->owner->ShareTokenSalt) {
             $this->owner->ShareTokenSalt = $this->getNewToken();
-            $this->owner->write();
+            $this->owner->writeWithoutVersion();
         }
 
         $found = null;
