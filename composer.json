@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^4.3",
-        "silverstripe/cms": "^4.3"
+        "silverstripe/framework": "^4.4@dev",
+        "silverstripe/cms": "^4.4@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",
