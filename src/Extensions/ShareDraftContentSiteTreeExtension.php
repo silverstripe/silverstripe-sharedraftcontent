@@ -55,8 +55,14 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
     {
         $shareToken = $this->getNewShareToken();
 
+        if ($this->owner->SubsiteID) {
+            $link = $this->owner->Subsite()->domain();
+        } else {
+            $link = Director::absoluteBaseURL();
+        }
+
         return Controller::join_links(
-            Director::absoluteBaseURL(),
+            $link,
             'preview',
             $this->generateKey($shareToken->Token),
             $shareToken->Token
