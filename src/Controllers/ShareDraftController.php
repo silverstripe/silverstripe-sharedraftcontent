@@ -75,6 +75,8 @@ class ShareDraftController extends Controller
         $page = Versioned::get_by_stage(SiteTree::class, Versioned::DRAFT)
             ->byID($shareToken->PageID);
 
+        $this->extend('updatePage', $page);
+
         $latest = Versioned::get_latest_version(SiteTree::class, $shareToken->PageID);
 
         $controller = $this->getControllerFor($page);
