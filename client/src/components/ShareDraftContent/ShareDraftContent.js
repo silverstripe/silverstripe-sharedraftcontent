@@ -118,7 +118,7 @@ class ShareDraftContent extends Component {
           href={learnMore}
           className="share-draft-content__learn-more"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
         </a>}
