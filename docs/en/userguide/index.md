@@ -1,5 +1,7 @@
+---
 title: Share draft content
 summary: Share draft page content with non-CMS users.
+---
 
 # Share draft content
 
@@ -13,7 +15,9 @@ This enables CMS users to generate a private link which can be shared securely w
 
 Navigating to the shared link will allow you to view the draft state of the page.
 
-<div class="note" markdown="1">If you navigate away from the shared draft page you will be taken to the published state.</div>
+[note]
+If you navigate away from the shared draft page you will be taken to the published state.
+[/note]
 
 Pages appear in two states:
 * Draft state contains content which is yet to be published. While viewing draft pages, a message will appear to inform you of this.
