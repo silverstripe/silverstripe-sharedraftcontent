@@ -10,6 +10,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Security\RandomGenerator;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
+use SilverStripe\Subsites\Model\Subsite;
 
 /**
  * @property SiteTree|ShareDraftContentSiteTreeExtension $owner
@@ -55,8 +56,14 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
     {
         $shareToken = $this->getNewShareToken();
 
+        if (class_exists(Subsite::class) && $this->owner->SubsiteID) {
+            $link = $this->owner->Subsite()->domain();
+        } else {
+            $link = Director::absoluteBaseURL();
+        }
+
         return Controller::join_links(
-            Director::absoluteBaseURL(),
+            $link,
             'preview',
             $this->generateKey($shareToken->Token),
             $shareToken->Token
