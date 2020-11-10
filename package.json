@@ -27,7 +27,8 @@
     "lint": "eslint client/src && sass-lint client/src",
     "lint-js": "eslint client/src",
     "lint-js-fix": "eslint client/src --fix",
-    "lint-sass": "sass-lint client/src"
+    "lint-sass": "sass-lint client/src",
+    "test": "echo 1 > /dev/null"
   },
   "dependencies": {
     "classnames": "^2.2.6",
