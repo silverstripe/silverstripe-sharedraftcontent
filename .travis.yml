@@ -5,4 +5,4 @@ import:
 
 env:
   global:
-    - BEHAT_SUITE="@sharedraftcontent"
+    - BEHAT_SUITE=sharedraftcontent
