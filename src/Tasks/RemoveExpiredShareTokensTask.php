@@ -12,7 +12,7 @@ use SilverStripe\ShareDraftContent\Models\ShareToken;
  *
  * To run this action the user needs admin rights.
  */
-class RemoveExpiredShareTokens extends BuildTask
+class RemoveExpiredShareTokensTask extends BuildTask
 {
     private static $segment = 'RemoveExpiredShareTokens';
 
