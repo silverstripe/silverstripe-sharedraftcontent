@@ -86,14 +86,14 @@ class ShareDraftController extends Controller
 
             // Temporarily un-secure the draft site and switch to draft
             $oldSecured = $this->getIsDraftSecured($session);
-            $oldMode = Versioned::get_reading_mode();
+            $oldMode = Versioned::get_default_reading_mode();
 
             // Process page inside an unsecured draft container
             try {
                 $this->setIsDraftSecured($session, false);
-                Versioned::set_stage('Stage');
+                Versioned::set_default_reading_mode('Stage.Stage');
 
-                $rendered = $this->getRenderedPageByURLSegment($page->URLSegment, $session);
+                $rendered = $this->getRenderedPageByURLSegment($page->URLSegment);
 
                 // Render draft heading
                 $data = new ArrayData(array(
@@ -103,7 +103,7 @@ class ShareDraftController extends Controller
                 $include = (string) $data->renderWith('Includes/TopBar');
             } finally {
                 $this->setIsDraftSecured($session, $oldSecured);
-                Versioned::set_reading_mode($oldMode);
+                Versioned::set_default_reading_mode($oldMode);
             }
 
             return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
