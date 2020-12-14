@@ -8,7 +8,9 @@ use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPRequestBuilder;
 use SilverStripe\Control\Middleware\HTTPCacheControlMiddleware;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
@@ -79,8 +81,6 @@ class ShareDraftController extends Controller
 
         $latest = Versioned::get_latest_version(SiteTree::class, $shareToken->PageID);
 
-        $controller = $this->getControllerFor($page);
-
         if (!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
             Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
 
@@ -93,14 +93,7 @@ class ShareDraftController extends Controller
                 $this->setIsDraftSecured($session, false);
                 Versioned::set_stage('Stage');
 
-                // Hack to get around ContentController::init() redirecting on home page
-                $_FILES = array(array());
-
-                // Create mock request; Simplify request to single top level request
-                $pageRequest = new HTTPRequest('GET', $page->URLSegment);
-                $pageRequest->match('$URLSegment//$Action/$ID/$OtherID', true);
-                $pageRequest->setSession($session);
-                $rendered = $controller->handleRequest($pageRequest);
+                $rendered = $this->getRenderedPageByURLSegment($page->URLSegment, $session);
 
                 // Render draft heading
                 $data = new ArrayData(array(
@@ -120,21 +113,32 @@ class ShareDraftController extends Controller
     }
 
     /**
+     * @param string $url
+     *
+     * @return HTTPResponse
+     */
+    protected function getRenderedPageByURLSegment($url)
+    {
+        $pageRequest = HTTPRequestBuilder::createFromEnvironment();
+        $pageRequest->setHttpMethod('GET');
+        $pageRequest->setUrl($url);
+
+        $response = Director::singleton()->handleRequest($pageRequest);
+        if ($response->isRedirect()) {
+            // The redirect will probably be Absolute URL so just want the path
+            $newUrl = parse_url($response->getHeader('location'), PHP_URL_PATH);
+            return $this->getRenderedPageByURLSegment($newUrl);
+        }
+        return $response;
+    }
+
+    /**
      * @return DBHTMLText
      */
     protected function errorPage()
     {
         Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
         return $this->renderWith('ShareDraftContentError');
-    }
-
-    /**
-     * @param SiteTree $page
-     * @return ContentController
-     */
-    protected function getControllerFor($page)
-    {
-        return ModelAsController::controller_for($page);
     }
 
     /**
