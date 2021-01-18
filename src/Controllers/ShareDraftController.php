@@ -103,6 +103,8 @@ class ShareDraftController extends Controller
                 $include = (string) $data->renderWith('Includes/TopBar');
             } finally {
                 $this->setIsDraftSecured($session, $oldSecured);
+                // Use set_default_reading_mode() instead of set_reading_mode() because that's
+                // what's used in Versioned::choose_site_stage()
                 Versioned::set_default_reading_mode($oldMode);
             }
 
