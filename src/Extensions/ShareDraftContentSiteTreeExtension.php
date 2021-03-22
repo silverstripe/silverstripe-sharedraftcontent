@@ -62,12 +62,16 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
             $link = Director::absoluteBaseURL();
         }
 
-        return Controller::join_links(
+        $tokenLink = Controller::join_links(
             $link,
             'preview',
             $this->generateKey($shareToken->Token),
             $shareToken->Token
         );
+
+        $this->owner->extend('updateShareTokenLink', $tokenLink, $shareToken);
+
+        return $tokenLink;
     }
 
     /**
