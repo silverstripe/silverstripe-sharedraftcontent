@@ -57,7 +57,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
         $shareToken = $this->getNewShareToken();
 
         if (class_exists(Subsite::class) && $this->owner->SubsiteID) {
-            $link = $this->owner->Subsite()->domain();
+            $link = $this->owner->Subsite()->absoluteBaseURL();
         } else {
             $link = Director::absoluteBaseURL();
         }
