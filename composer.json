@@ -3,7 +3,9 @@
     "type": "silverstripe-vendormodule",
     "description": "Share draft page content with non-CMS users",
     "license": "BSD-3-Clause",
-    "keywords": ["silverstripe"],
+    "keywords": [
+        "silverstripe"
+    ],
     "authors": [
         {
             "name": "Damian Mooyman",
@@ -27,9 +29,6 @@
         "squizlabs/php_codesniffer": "^3.0"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
-        },
         "expose": [
             "client/dist"
         ]
