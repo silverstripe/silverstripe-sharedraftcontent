@@ -4,13 +4,14 @@ namespace SilverStripe\ShareDraftContent\Controllers;
 
 use BadMethodCallException;
 use PageController;
-use SilverStripe\CMS\Controllers\ContentController;
-use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\Core\Environment;
+use SilverStripe\Dev\Deprecation;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPRequestBuilder;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Middleware\HTTPCacheControlMiddleware;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
@@ -35,16 +36,16 @@ class ShareDraftController extends Controller
     /**
      * @var array
      */
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'preview'
-    );
+    ];
 
     /**
      * @var array
      */
-    private static $url_handlers = array(
+    private static $url_handlers = [
         '$Key/$Token' => 'preview'
-    );
+    ];
 
     /**
      * @param HTTPRequest $request
@@ -93,7 +94,7 @@ class ShareDraftController extends Controller
                 $this->setIsDraftSecured($session, false);
                 Versioned::set_default_reading_mode('Stage.Stage');
 
-                $rendered = $this->getRenderedPageByURLSegment($page->URLSegment);
+                $rendered = $this->getRenderedPageByURL($page->Link());
 
                 // Render draft heading
                 $data = new ArrayData(array(
@@ -117,20 +118,59 @@ class ShareDraftController extends Controller
     /**
      * @param string $url
      *
+     * @deprecated 3.0 Use {@link getRenderedPageByURL()}
+     *
      * @return HTTPResponse
      */
     protected function getRenderedPageByURLSegment($url)
     {
+        Deprecation::notice(
+            '3.0',
+            'getRenderedPageByURLSegment() should be replaced with getRenderedPageByURL()'
+        );
+
         $pageRequest = HTTPRequestBuilder::createFromEnvironment();
         $pageRequest->setHttpMethod('GET');
         $pageRequest->setUrl($url);
 
         $response = Director::singleton()->handleRequest($pageRequest);
+
         if ($response->isRedirect()) {
             // The redirect will probably be Absolute URL so just want the path
             $newUrl = parse_url($response->getHeader('location'), PHP_URL_PATH);
+
             return $this->getRenderedPageByURLSegment($newUrl);
         }
+
+        return $response;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return HTTPResponse
+     */
+    private function getRenderedPageByURL(string $url): HTTPResponse
+    {
+        // Clean and update live global variables. This is how
+        // HTTPRequestBuilder::createFromEnvironment works internally.
+        $variables = HTTPRequestBuilder::cleanEnvironment(Environment::getVariables());
+        $variables['_SERVER']['REQUEST_URI'] = $url;
+        $variables['_SERVER']['REQUEST_METHOD'] = 'GET';
+        Environment::setVariables($variables);
+
+        // Health-check prior to creating environment
+        $pageRequest = HTTPRequestBuilder::createFromVariables($variables, @file_get_contents('php://input'));
+
+        $response = Director::singleton()->handleRequest($pageRequest);
+
+        if ($response->isRedirect()) {
+            // The redirect will probably be Absolute URL so just want the path
+            $newUrl = parse_url($response->getHeader('location'), PHP_URL_PATH);
+
+            return $this->getRenderedPageByURL($newUrl);
+        }
+
         return $response;
     }
 
