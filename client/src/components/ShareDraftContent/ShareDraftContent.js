@@ -138,7 +138,7 @@ class ShareDraftContent extends Component {
       <div className="share-draft-content__link-container">
         <input
           type="text"
-          className="share-draft-content__link form-control"
+          className="share-draft-content__link form-control no-change-track"
           title={i18n._t('ShareDraftContent.LINK_HELP', 'Link to share draft content')}
           value={previewUrl}
           onChange={this.handleInputChange}
