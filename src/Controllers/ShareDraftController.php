@@ -4,6 +4,11 @@ namespace SilverStripe\ShareDraftContent\Controllers;
 
 use BadMethodCallException;
 use PageController;
+use SilverStripe\Assets\File;
+use SilverStripe\Assets\FilenameParsing\FileIDHelperResolutionStrategy;
+use SilverStripe\Assets\FilenameParsing\FileResolutionStrategy;
+use SilverStripe\Assets\FilenameParsing\HashFileIDHelper;
+use SilverStripe\Assets\Storage\AssetStore;
 use SilverStripe\Core\Environment;
 use SilverStripe\Dev\Deprecation;
 use SilverStripe\CMS\Model\SiteTree;
@@ -96,6 +101,8 @@ class ShareDraftController extends Controller
 
                 $rendered = $this->getRenderedPageByURL($page->Link());
 
+                $this->grantAccessToDraftFiles($rendered);
+
                 // Render draft heading
                 $data = new ArrayData(array(
                     'Page' => $page,
@@ -112,6 +119,54 @@ class ShareDraftController extends Controller
             return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
         } else {
             return $this->errorPage();
+        }
+    }
+
+    /**
+     * With the rendered HTML, regex match files that are in the protected asset store and grant access
+     * if they have no view permissions on them.  This means they are only in the protected asset store
+     * because they are unpublished
+     *
+     * This will also correctly handle modified files (different version on draft vs live)
+     *
+     * Doing a regex on rendered HTML, rather than using shortcodes, because ShareDraftController has no
+     * underlying understanding of how HTML is generated (e.g. $page->Content vs content blocks vs other methods).
+     * Instead it does a "fake request" to a page url to get the rendered HTML
+     *
+     * Ideally we'd do this on shortcodes higher up around where `$page` is defined, though we'd need a
+     * "Content API" to handle things such as content blocks.
+     *
+     * This method is limited to only handle the default config of the .protected asset store which is
+     * FileIDHelperResolutionStrategy with HashFileIDHelper
+     *
+     * @param string $rendered
+     */
+    private function grantAccessToDraftFiles(string $rendered): void
+    {
+        $strategy = Injector::inst()->get(FileResolutionStrategy::class . '.protected');
+        if (!($strategy instanceof FileIDHelperResolutionStrategy)) {
+            return;
+        }
+        $helper = $strategy->getDefaultFileIDHelper();
+        if (!($helper instanceof HashFileIDHelper)) {
+            return;
+        }
+        $store = Injector::inst()->get(AssetStore::class);
+        // Example of image in folder: /assets/myfolder/cdce3f8a1a/sample-kokako__ResizedImageWzYwMCw0NTBd.jpg
+        // Making the assumption that shortcode providers will always use double quotes for attributes
+        $regex = '#<(img|a)[^>]+(src|href)="([^"]*?)' . ASSETS_DIR . '/([^"]*?/?([a-z0-9]{10})/[^./]+\.[a-z0-9]+)"#';
+        preg_match_all($regex, $rendered, $matches);
+        $urls = $matches[4];
+        foreach ($urls as $url) {
+            $parsed = $helper->parseFileID($url);
+            if (!$parsed) {
+                continue;
+            }
+            $file = File::get()->find('FileHash:StartsWith', $parsed->getHash());
+            if (is_null($file) || !$file->canView()) {
+                continue;
+            }
+            $store->grant($parsed->getFilename(), $parsed->getHash());
         }
     }
 

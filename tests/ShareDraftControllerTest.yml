@@ -1,0 +1,52 @@
+SilverStripe\Security\Permission:
+  cmsaccess:
+    Code: CMS_ACCESS_CMSMain
+
+SilverStripe\Security\Group:
+  cmsaccess:
+    Title: 'CMS Access'
+    code: cmsaccess
+    Permissions: =>SilverStripe\Security\Permission.cmsaccess
+  super:
+    Title: Super
+    code: super
+
+SilverStripe\Security\Member:
+  super-user:
+    FirstName: Super
+    Surname: User
+    email: super@example.com
+    Groups: =>SilverStripe\Security\Group.super,=>SilverStripe\Security\Group.cmsaccess
+  content-author:
+    FirstName: Content
+    Surname: Author
+    email: content@example.com
+    Groups: =>SilverStripe\Security\Group.cmsaccess
+
+SilverStripe\CMS\Model\SiteTree:
+  x1:
+    Title: 'My page'
+    Content: |
+      Image with no permissions [image id="2" width="300" height="200"]
+      Image with permissions [image id="3" width="300" height="200"]
+
+SilverStripe\Assets\Folder:
+  x1:
+    Name: folder
+
+SilverStripe\Assets\Image:
+  no-permissions:
+    FileFilename: folder/no-permissions.png
+    FileHash: 444065542b5dd5187166d8e1cd684e0d724c5a97
+    Parent: =>SilverStripe\Assets\Folder.x1
+    Name: no-permissions.png
+    CanViewType: Anyone
+  permissions:
+    FileFilename: folder/permissions.png
+    FileHash: 46affab7043cfd9f1ded919dd24affd08e926eca
+    Parent: =>SilverStripe\Assets\Folder.x1
+    Name: permissions.png
+    CanViewType: OnlyTheseUsers
+    ViewerGroups: =>SilverStripe\Security\Group.super
+
+
