@@ -1,32 +1,29 @@
-# Run sharedraftcontent behat tests with this command
-# Note that sharedraftcontent behat tests require CMS module
-# ========================================================================= #
-# chromedriver
-# vendor/bin/behat @sharedraftcontent
-# ========================================================================= #
 default:
   suites:
     sharedraftcontent:
       paths:
-        - '%paths.modules.sharedraftcontent%/tests/Behat/features'
+        - "%paths.modules.sharedraftcontent%/tests/behat/features"
       contexts:
-        - SilverStripe\Framework\Tests\Behaviour\FeatureContext
+        - SilverStripe\Admin\Tests\Behat\Context\AdminContext
+        - SilverStripe\BehatExtension\Context\BasicContext
+        - SilverStripe\BehatExtension\Context\EmailContext
+        - SilverStripe\BehatExtension\Context\LoginContext
         - SilverStripe\Framework\Tests\Behaviour\CmsFormsContext
         - SilverStripe\Framework\Tests\Behaviour\CmsUiContext
-        - SilverStripe\BehatExtension\Context\BasicContext
-        - SilverStripe\BehatExtension\Context\LoginContext
+        - SilverStripe\ShareDraftContent\Tests\Behat\Context\FeatureContext
+        - SilverStripe\ShareDraftContent\Tests\Behat\Context\FixtureContext
         -
-          SilverStripe\BehatExtension\Context\FixtureContext:
-            - '%paths.modules.sharedraftcontent%/tests/Behat/files/'
+          SilverStripe\ShareDraftContent\Tests\Behat\Context\FixtureContext:
+            - "%paths.modules.sharedraftcontent%/tests/behat/files/"
+
   extensions:
     SilverStripe\BehatExtension\MinkExtension:
       default_session: facebook_web_driver
       javascript_session: facebook_web_driver
       facebook_web_driver:
         browser: chrome
-        wd_host: "http://127.0.0.1:9515" #chromedriver port
-      browser_name: chrome
+        wd_host: "http://127.0.0.1:9515"
+
     SilverStripe\BehatExtension\Extension:
-      bootstrap_file: vendor/silverstripe/cms/tests/behat/serve-bootstrap.php
-      screenshot_path: '%paths.base%/artifacts/screenshots'
-      retry_seconds: 4 # default is 2
+      screenshot_path: "%paths.base%/artifacts/screenshots"
+      bootstrap_file: vendor/silverstripe/framework/tests/behat/serve-bootstrap.php
