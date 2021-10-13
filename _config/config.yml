@@ -11,6 +11,9 @@ SilverStripe\CMS\Controllers\CMSMain:
 SilverStripe\Control\Controller:
   extensions:
     - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentControllerExtension
+SilverStripe\Assets\Shortcodes\FileShortcodeProvider:
+  extensions:
+    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentFileShortcodeProviderExtension
 SilverStripe\Control\Director:
   rules:
     'preview': 'SilverStripe\ShareDraftContent\Controllers\ShareDraftController'
