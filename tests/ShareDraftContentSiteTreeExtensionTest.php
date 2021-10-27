@@ -77,7 +77,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
         $controller = new ShareDraftController();
         $response = $controller->preview($request);
 
-        $this->assertContains('share-draft-content-message', $response);
+        $this->assertStringContainsString('share-draft-content-message', $response);
 
         $request = new HTTPRequest('GET', $firstShareLink);
 
@@ -89,6 +89,6 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
         $controller = new ShareDraftController();
         $response = $controller->preview($request);
 
-        $this->assertContains('share-draft-error-page', $response);
+        $this->assertStringContainsString('share-draft-error-page', $response);
     }
 }
