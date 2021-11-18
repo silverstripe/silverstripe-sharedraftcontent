@@ -37,7 +37,8 @@
     "autoload": {
         "psr-4": {
             "SilverStripe\\ShareDraftContent\\": "src/",
-            "SilverStripe\\ShareDraftContent\\Tests\\": "tests/"
+            "SilverStripe\\ShareDraftContent\\Tests\\": "tests/",
+            "SilverStripe\\ShareDraftContent\\Tests\\Behat\\Context\\": "tests/behat/src/"
         }
     },
     "minimum-stability": "dev",
