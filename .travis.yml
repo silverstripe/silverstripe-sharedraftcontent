@@ -5,6 +5,5 @@ import:
 
 env:
   global:
-    # Change to "4.10.x-dev || " once the 4.10 branch in silverstripe/assets has been created
-    - REQUIRE_RECIPE="4.x-dev || "
+    - REQUIRE_RECIPE="4.10.x-dev || "
     - BEHAT_SUITE=sharedraftcontent
