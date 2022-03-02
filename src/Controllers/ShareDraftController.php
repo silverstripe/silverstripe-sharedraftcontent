@@ -48,6 +48,19 @@ class ShareDraftController extends Controller
     ];
 
     /**
+     * @var bool
+     */
+    protected static $isViewingPreview = false;
+
+    /**
+     * @return bool
+     */
+    public static function getIsViewingPreview(): bool
+    {
+        return static::$isViewingPreview;
+    }
+
+    /**
      * @param HTTPRequest $request
      *
      * @return string|DBHTMLText
@@ -88,6 +101,7 @@ class ShareDraftController extends Controller
             // Temporarily un-secure the draft site and switch to draft
             $oldSecured = $this->getIsDraftSecured($session);
             $oldMode = Versioned::get_default_reading_mode();
+            static::$isViewingPreview = true;
 
             // Process page inside an unsecured draft container
             try {
@@ -107,6 +121,7 @@ class ShareDraftController extends Controller
                 // Use set_default_reading_mode() instead of set_reading_mode() because that's
                 // what's used in Versioned::choose_site_stage()
                 Versioned::set_default_reading_mode($oldMode);
+                static::$isViewingPreview = false;
             }
 
             return str_replace('</body>', $include . '</body>', (string) $rendered->getBody());
