@@ -60,7 +60,7 @@ class ShareDraftContentSiteTreeExtensionTest extends FunctionalTest
             $secondSharedPage->generateKey($firstSharedPageToken->Token)
         );
 
-        $parts = explode('/', $firstShareLink);
+        $parts = explode('/', $firstShareLink ?? '');
 
         $token = array_pop($parts);
         $key = array_pop($parts);

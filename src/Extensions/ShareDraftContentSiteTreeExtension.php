@@ -120,7 +120,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
     {
         $generator = new RandomGenerator();
 
-        return substr($generator->randomToken('sha256'), 0, 16);
+        return substr($generator->randomToken('sha256') ?? '', 0, 16);
     }
 
     /**
@@ -130,7 +130,7 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
      */
     public function generateKey($salt)
     {
-        return hash_pbkdf2('sha256', $salt, $this->owner->ShareTokenSalt, 1000, 16);
+        return hash_pbkdf2('sha256', $salt ?? '', $this->owner->ShareTokenSalt ?? '', 1000, 16);
     }
 
     /**
