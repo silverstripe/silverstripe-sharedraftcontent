@@ -152,7 +152,7 @@ class ShareDraftController extends Controller
 
         if ($response->isRedirect()) {
             // The redirect will probably be Absolute URL so just want the path
-            $newUrl = parse_url($response->getHeader('location'), PHP_URL_PATH);
+            $newUrl = parse_url($response->getHeader('location') ?? '', PHP_URL_PATH);
 
             return $this->getRenderedPageByURLSegment($newUrl);
         }
@@ -183,7 +183,7 @@ class ShareDraftController extends Controller
 
         if ($response->isRedirect()) {
             // The redirect will probably be Absolute URL so just want the path
-            $newUrl = parse_url($response->getHeader('location'), PHP_URL_PATH);
+            $newUrl = parse_url($response->getHeader('location') ?? '', PHP_URL_PATH);
 
             return $this->getRenderedPageByURL($newUrl);
         }

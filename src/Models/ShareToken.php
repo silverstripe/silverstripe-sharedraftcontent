@@ -42,7 +42,7 @@ class ShareToken extends DataObject
      */
     public function isExpired()
     {
-        $createdSeconds = strtotime($this->Created);
+        $createdSeconds = strtotime($this->Created ?? '');
 
         $validForSeconds = (int) $this->ValidForDays * 24 * 60 * 60;
 
