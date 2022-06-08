@@ -172,7 +172,11 @@ class ShareDraftController extends Controller
         $variables = HTTPRequestBuilder::cleanEnvironment(Environment::getVariables());
         $variables['_SERVER']['REQUEST_URI'] = $url;
         $variables['_SERVER']['REQUEST_METHOD'] = 'GET';
-        $variables['_SERVER']['HTTP_USER_AGENT'] = 'CLI';
+        $variables['_SERVER']['HTTP_USER_AGENT'] =
+            isset($variables['_SERVER']['HTTP_USER_AGENT']) &&
+            $variables['_SERVER']['HTTP_USER_AGENT']
+            ? $variables['_SERVER']['HTTP_USER_AGENT']
+            : 'CLI';
 
         Environment::setVariables($variables);
 
