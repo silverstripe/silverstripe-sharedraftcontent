@@ -1,11 +1,7 @@
 # Share Draft Content
 
 [![CI](https://github.com/silverstripe/silverstripe-sharedraftcontent/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-sharedraftcontent/actions/workflows/ci.yml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-sharedraftcontent/?branch=master)
-[![codecov](https://codecov.io/gh/silverstripe/silverstripe-sharedraftcontent/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-sharedraftcontent)
-[![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
-[![Version](http://img.shields.io/packagist/v/silverstripe/sharedraftcontent.svg?style=flat)](https://packagist.org/packages/silverstripe/silverstripe-sharedraftcontent)
-[![License](http://img.shields.io/packagist/l/silverstripe/sharedraftcontent.svg?style=flat)](LICENSE.md)
+[![Silverstripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 
 Share draft page content with non-CMS users.
 
@@ -15,10 +11,10 @@ This module adds a 'Share draft' action menu to the CMS. This enables Content Au
 
 ## Requirements
 
-- SilverStripe ^4.4
+- Silverstripe ^4.4
 
-Note: this version is compatible with SilverStripe 4. For SilverStripe 3, please see the 1.x release line. Previous 2.x
-releases exist for earlier SilverStripe 4.x versions.
+Note: this version is compatible with Silverstripe 4. For Silverstripe 3, please see the 1.x release line. Previous 2.x
+releases exist for earlier Silverstripe 4.x versions.
 
 ## Installation
 
