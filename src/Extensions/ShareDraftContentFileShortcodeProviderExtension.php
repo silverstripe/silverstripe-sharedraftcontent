@@ -20,16 +20,27 @@ class ShareDraftContentFileShortcodeProviderExtension extends Extension
         if ($grant) {
             return;
         }
-        $session = $session = Controller::curr()->getRequest()->getSession();
+
+        $controller = Controller::curr();
+
+        if (!$controller) {
+            return;
+        }
+
+        $session = $controller->getRequest()->getSession();
+
         if (!$session) {
             return;
         }
+
         if (!ShareDraftController::getIsViewingPreview()) {
             return;
         }
+
         if (!$record && $args) {
             $record = FileShortcodeProvider::find_shortcode_record($args);
         }
+
         if ($record) {
             $grant = !$record->hasRestrictedAccess();
         }
