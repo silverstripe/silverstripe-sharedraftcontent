@@ -1,5 +1,7 @@
+---
 title: Share draft content
 summary: Share draft page content with non-CMS users.
+---
 
 # Share draft content
 
