@@ -133,16 +133,13 @@ class ShareDraftController extends Controller
     /**
      * @param string $url
      *
-     * @deprecated 3.0 Use {@link getRenderedPageByURL()}
+     * @deprecated 3.0.0 Use getRenderedPageByURL() instead
      *
      * @return HTTPResponse
      */
     protected function getRenderedPageByURLSegment($url)
     {
-        Deprecation::notice(
-            '3.0',
-            'getRenderedPageByURLSegment() should be replaced with getRenderedPageByURL()'
-        );
+        Deprecation::notice('3.0.0', 'Use getRenderedPageByURL() instead');
 
         $pageRequest = HTTPRequestBuilder::createFromEnvironment();
         $pageRequest->setHttpMethod('GET');
