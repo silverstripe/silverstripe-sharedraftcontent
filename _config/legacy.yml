@@ -1,3 +1,0 @@
-SilverStripe\ORM\DatabaseAdmin:
-  classname_value_remapping:
-    ShareToken: SilverStripe\ShareDraftContent\Models\ShareToken
