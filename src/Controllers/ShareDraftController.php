@@ -5,7 +5,6 @@ namespace SilverStripe\ShareDraftContent\Controllers;
 use BadMethodCallException;
 use PageController;
 use SilverStripe\Core\Environment;
-use SilverStripe\Dev\Deprecation;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
@@ -128,33 +127,6 @@ class ShareDraftController extends Controller
         } else {
             return $this->errorPage();
         }
-    }
-
-    /**
-     * @param string $url
-     *
-     * @deprecated 3.0.0 Use getRenderedPageByURL() instead
-     *
-     * @return HTTPResponse
-     */
-    protected function getRenderedPageByURLSegment($url)
-    {
-        Deprecation::notice('3.0.0', 'Use getRenderedPageByURL() instead');
-
-        $pageRequest = HTTPRequestBuilder::createFromEnvironment();
-        $pageRequest->setHttpMethod('GET');
-        $pageRequest->setUrl($url);
-
-        $response = Director::singleton()->handleRequest($pageRequest);
-
-        if ($response->isRedirect()) {
-            // The redirect will probably be Absolute URL so just want the path
-            $newUrl = parse_url($response->getHeader('location') ?? '', PHP_URL_PATH);
-
-            return $this->getRenderedPageByURLSegment($newUrl);
-        }
-
-        return $response;
     }
 
     /**
