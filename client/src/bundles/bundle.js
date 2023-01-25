@@ -1,2 +1,2 @@
-require('../legacy/ShareDraftContentEntwine');
-require('boot');
+import '../legacy/ShareDraftContentEntwine';
+import 'boot';
