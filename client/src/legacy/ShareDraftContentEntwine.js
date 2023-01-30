@@ -1,6 +1,6 @@
 import jQuery from 'jquery';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { loadComponent } from 'lib/Injector';
 
 /**
@@ -9,6 +9,8 @@ import { loadComponent } from 'lib/Injector';
  */
 jQuery.entwine('ss', ($) => {
   $('.js-injector-boot .share-draft-content__placeholder').entwine({
+    ReactRoot: null,
+
     onmatch() {
       const cmsContent = this.closest('.cms-content').attr('id');
       const context = (cmsContent)
@@ -20,20 +22,28 @@ jQuery.entwine('ss', ($) => {
       // part of the CMS
       const contextKey = this.closest('.cms-preview').length > 0 ? 'preview' : 'edit';
 
-      ReactDOM.render(
+      let root = this.getReactRoot();
+      if (!root) {
+        root = createRoot(this[0]);
+        this.setReactRoot(root);
+      }
+      root.render(
         <ShareDraftContentComponent
           id={`share-draft-content-${contextKey}`}
           links={{
             generateLink: this.data('url'),
             learnMore: this.data('helpurl'),
           }}
-        />,
-        this[0]
+        />
       );
     },
 
     onunmatch() {
-      ReactDOM.unmountComponentAtNode(this[0]);
+      const root = this.getReactRoot();
+      if (root) {
+        root.unmount();
+        this.setReactRoot(null);
+      }
     }
   });
 });
