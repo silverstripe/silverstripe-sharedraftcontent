@@ -1,0 +1,24 @@
+en:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Change view mode'
+    DualWindowView: 'Dual Window'
+    EditView: 'Edit mode'
+    PreviewView: 'Preview mode'
+    SplitView: 'Split mode'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: 'Draft state'
+    PAGE_EXPIRED: 'Oops. The page you''re trying to reach<br> may have expired.'
+    PUBLISHED_STATE: 'Published state'
+    TOPBAR_CURRENTLY_DRAFT: 'You are viewing the <em>draft state</em> of this page, any page you navigate to will be the <em>published state</em>.'
+    TOPBAR_DRAFT_DESC: 'contains content which is yet to be published. While viewing draft pages, a message will appear to inform you of this.'
+    TOPBAR_HOW_IT_WORKS: 'How it works.'
+    TOPBAR_PUBLISHED_DESC: 'contains content which has been published. As a result, you will not be notified of this, and will see the live version of the site.'
+    TOPBAR_TWO_STATES: 'Pages appear in two states:'
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: 'Share Tokens'
+    PLURALS:
+      one: 'A Share Token'
+      other: '{count} Share Tokens'
+    SINGULARNAME: 'Share Token'
+    db_Token: Token
+    db_ValidForDays: 'Valid for days'
