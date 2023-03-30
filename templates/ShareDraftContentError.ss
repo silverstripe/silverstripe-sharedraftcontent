@@ -10,8 +10,7 @@
 	<body id="share-draft-error-page">
 		<div class="message">
 			<p>
-				Oops. The page you're trying to reach<br>
-				may have expired.
+				<%t SilverStripe\ShareDraftContent\Controllers\ShareDraftController.PAGE_EXPIRED "Oops. The page you're trying to reach<br> may have expired." %>
 			</p>
 		</div>
 
