@@ -9,22 +9,11 @@ Share draft page content with non-CMS users.
 
 This module adds a 'Share draft' action menu to the CMS. This enables Content Authors to generate tokenised links to draft pages. Content authors can share these links with anyone, allowing non-CMS user to view draft page content. Each preview link is valid for 30 days.
 
-## Requirements
-
-- Silverstripe ^4.4
-
-Note: this version is compatible with Silverstripe 4. For Silverstripe 3, please see the 1.x release line. Previous 2.x
-releases exist for earlier Silverstripe 4.x versions.
-
 ## Installation
 
-The easiest way to install is by using [Composer](https://getcomposer.org):
-
 ```sh
-$ composer require silverstripe/sharedraftcontent
+composer require silverstripe/sharedraftcontent
 ```
-
-You'll also need to run `dev/build`. You should now see a link/button on the bottom-right of edit pages. Clicking the link will generate a new share link.
 
 # Developer Tools
 
