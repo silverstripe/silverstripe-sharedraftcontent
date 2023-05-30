@@ -1,0 +1,21 @@
+sv:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Ändra visningsläge'
+    DualWindowView: 'Dubbla fönster'
+    EditView: Editeringsläge
+    PreviewView: Förhandsgranskningsläge
+    SplitView: 'Delat läge'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: 'Utkast läge'
+    PAGE_EXPIRED: 'Oops. Sidan du försöker nå<br> kan ha gått ut.'
+    PUBLISHED_STATE: 'Publicerat läge'
+    TOPBAR_CURRENTLY_DRAFT: 'Du ser på <em>utkastläge</em> av denna sida, sidor du navigerar till kommer att vara i <em>publicerat läge</em>.'
+    TOPBAR_DRAFT_DESC: 'innehåller information som inte ännu är publicerat. Medan du ser på utkast sidor, ett meddelande kommer visas för att informera dig om detta.'
+    TOPBAR_HOW_IT_WORKS: 'Hur det fungerar.'
+    TOPBAR_PUBLISHED_DESC: 'innehåller information som har blivit publicerat. På grund av detta kommer du inte bli informerad om detta, och kommer se live-versionen av sidan.'
+    TOPBAR_TWO_STATES: 'Sidor visas i två lägen:'
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: 'Dela Tokens'
+    SINGULARNAME: 'Dela Token'
+    db_Token: Token
+    db_ValidForDays: 'Giltig för dagar'
