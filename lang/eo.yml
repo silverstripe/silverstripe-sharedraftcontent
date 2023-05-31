@@ -1,0 +1,24 @@
+eo:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Ŝanĝi vidan reĝimon'
+    DualWindowView: 'Duopa fenestro'
+    EditView: 'Redakta reĝimo'
+    PreviewView: 'Antaŭvida reĝimo'
+    SplitView: 'Divida reĝimo'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: 'Malneta stato'
+    PAGE_EXPIRED: 'Ho ve. La paĝo kiun vi provas atingi<br> eble senvalidiĝis.'
+    PUBLISHED_STATE: 'Publikigita stato'
+    TOPBAR_CURRENTLY_DRAFT: 'Vi vidas la <em>malnetan staton</em> de ĉi tiu paĝo. Iu paĝo al kiu vi navigos, tiu estos  <em>publikigita stato</em>.'
+    TOPBAR_DRAFT_DESC: 'tenas enhavon ankoraŭ ne publikigita. Dum vi vidas malnetajn paĝojn, mesaĝo aperos por informi pri tio.'
+    TOPBAR_HOW_IT_WORKS: 'Kiel ĝi funkcias.'
+    TOPBAR_PUBLISHED_DESC: 'tenas enhavon ankoraŭ ne publikigita. Pro tio, vi ne ricevos mesaĝon, kaj vi vidos la publikan version de la retejo.'
+    TOPBAR_TWO_STATES: 'Paĝoj aperas en du statoj:'
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: 'Komunaj ĵetonoj'
+    PLURALS:
+      one: 'Unu komuna ĵetono'
+      other: '{count} komunaj ĵetonoj'
+    SINGULARNAME: 'Komuna ĵetono'
+    db_Token: Ĵetono
+    db_ValidForDays: 'Valida por tagoj'
