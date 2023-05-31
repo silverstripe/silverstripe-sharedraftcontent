@@ -1,0 +1,26 @@
+sl:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Zamenjaj pogled'
+    DualWindowView: 'Dvojno okno'
+    EditView: Urejanje
+    PreviewView: Predogled
+    SplitView: 'Deljeni način'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: Osnutek
+    PAGE_EXPIRED: 'Veljavnost strani, ki si jo skušate ogledati,<br> je potekla.'
+    PUBLISHED_STATE: Objavljeno
+    TOPBAR_CURRENTLY_DRAFT: 'Ogledujete si <em>osnutek</em> strani. Če boste odnavigirali z nje, si boste ogledovali <em>objavljene</em> strani.'
+    TOPBAR_DRAFT_DESC: 'prikazuje vsebino, ki še ni objavljena. Med ogledovanjem osnutka, vas bomo na to opozorili.'
+    TOPBAR_HOW_IT_WORKS: 'Kako deluje?'
+    TOPBAR_PUBLISHED_DESC: 'prikazuje objavljeno vsebino. Na to vas ne bomo posebej opozarjali, ampak vam bomo samo prikazali vsebino, ki je objavljena.'
+    TOPBAR_TWO_STATES: 'Strani so na voljo v dveh oblikah:'
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: Ključi
+    PLURALS:
+      one: Ključ
+      two: '{count} ključa'
+      few: '{count} ključev'
+      other: '{count} ključev'
+    SINGULARNAME: Ključ
+    db_Token: Ključ
+    db_ValidForDays: 'Veljavno (dni)'
