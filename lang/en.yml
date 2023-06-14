@@ -22,3 +22,7 @@ en:
     SINGULARNAME: 'Share Token'
     db_Token: Token
     db_ValidForDays: 'Valid for days'
+    has_one_Page: Page
+  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
+    db_ShareTokenSalt: 'Share token salt'
+    has_many_ShareTokens: 'Share tokens'
