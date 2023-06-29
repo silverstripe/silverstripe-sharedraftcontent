@@ -34,7 +34,7 @@ jQuery.entwine('ss', ($) => {
             generateLink: this.data('url'),
             learnMore: this.data('helpurl'),
           }}
-        />
+        />,
       );
     },
 
@@ -44,6 +44,6 @@ jQuery.entwine('ss', ($) => {
         root.unmount();
         this.setReactRoot(null);
       }
-    }
+    },
   });
 });

@@ -53,7 +53,7 @@ class ShareDraftContent extends Component {
     const { links: { generateLink } } = this.props;
 
     return fetch(generateLink, { credentials: 'same-origin' })
-      .then(response => response.text())
+      .then((response) => response.text())
       .then(
         (response) => {
           this.setState({
@@ -66,7 +66,7 @@ class ShareDraftContent extends Component {
         },
         () => {
           this.setState({ error: true });
-        }
+        },
       );
   }
 
@@ -94,7 +94,7 @@ class ShareDraftContent extends Component {
       <div className="alert alert-danger">
         {i18n._t(
           'ShareDraftContent.FETCH_ERROR',
-          'There was a problem generating the shareable link!'
+          'There was a problem generating the shareable link!',
         )}
       </div>
     );
@@ -113,15 +113,17 @@ class ShareDraftContent extends Component {
       <p>
         {i18n._t(
           'ShareDraftContent.DESCRIPTION',
-          'Anyone with this link can view the draft version of this page.'
-        )} {learnMore && <a
-          href={learnMore}
-          className="share-draft-content__learn-more"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
-        </a>}
+          'Anyone with this link can view the draft version of this page.',
+        )} {learnMore &&
+          <a
+            href={learnMore}
+            className="share-draft-content__learn-more"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
+          </a>
+          }
       </p>
     );
   }
@@ -226,5 +228,5 @@ ShareDraftContent.defaultProps = {
 export { ShareDraftContent as Component };
 
 export default inject(
-  ['PopoverField']
+  ['PopoverField'],
 )(ShareDraftContent);
