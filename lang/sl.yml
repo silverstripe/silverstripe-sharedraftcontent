@@ -17,10 +17,10 @@ sl:
   SilverStripe\ShareDraftContent\Models\ShareToken:
     PLURALNAME: Ključi
     PLURALS:
-      one: Ključ
-      two: '{count} ključa'
       few: '{count} ključev'
+      one: Ključ
       other: '{count} ključev'
+      two: '{count} ključa'
     SINGULARNAME: Ključ
     db_Token: Ključ
     db_ValidForDays: 'Veljavno (dni)'
