@@ -14,6 +14,9 @@ en:
     TOPBAR_HOW_IT_WORKS: 'How it works.'
     TOPBAR_PUBLISHED_DESC: 'contains content which has been published. As a result, you will not be notified of this, and will see the live version of the site.'
     TOPBAR_TWO_STATES: 'Pages appear in two states:'
+  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
+    db_ShareTokenSalt: 'Share token salt'
+    has_many_ShareTokens: 'Share tokens'
   SilverStripe\ShareDraftContent\Models\ShareToken:
     PLURALNAME: 'Share Tokens'
     PLURALS:
@@ -23,6 +26,3 @@ en:
     db_Token: Token
     db_ValidForDays: 'Valid for days'
     has_one_Page: Page
-  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
-    db_ShareTokenSalt: 'Share token salt'
-    has_many_ShareTokens: 'Share tokens'

@@ -6,11 +6,11 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
   }
 } else {
   ss.i18n.addDictionary('sv', {
-    "ShareDraftContent.LOADING": "Laddar...",
-    "ShareDraftContent.FETCH_ERROR": "Det gick inte att generera den delbara länken!",
     "ShareDraftContent.DESCRIPTION": "Alla med den här länken kan se utkastversionen av den här sidan.",
+    "ShareDraftContent.FETCH_ERROR": "Det gick inte att generera den delbara länken!",
     "ShareDraftContent.LEARN_MORE": "Lär dig mer",
     "ShareDraftContent.LINK_HELP": "Länk för att dela utkast innehåll",
+    "ShareDraftContent.LOADING": "Laddar...",
     "ShareDraftContent.SHARE": "Dela",
     "ShareDraftContent.SHARE_DRAFT_CONTENT": "Dela innehåll i utkast"
 });
