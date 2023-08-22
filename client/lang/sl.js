@@ -6,11 +6,11 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
   }
 } else {
   ss.i18n.addDictionary('sl', {
-    "ShareDraftContent.LOADING": "Nalagam ...",
-    "ShareDraftContent.FETCH_ERROR": "Pri generiranju povezave je prišlo do napake.",
     "ShareDraftContent.DESCRIPTION": "Vsak, ki ima to povezavo, lahko dostopa do osnutka te strani.",
+    "ShareDraftContent.FETCH_ERROR": "Pri generiranju povezave je prišlo do napake.",
     "ShareDraftContent.LEARN_MORE": "Več o tem",
     "ShareDraftContent.LINK_HELP": "Povezava do osnutka strani",
+    "ShareDraftContent.LOADING": "Nalagam ...",
     "ShareDraftContent.SHARE": "Posreduj",
     "ShareDraftContent.SHARE_DRAFT_CONTENT": "Posredujte osnutek strani"
 });
