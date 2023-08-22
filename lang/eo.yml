@@ -14,6 +14,9 @@ eo:
     TOPBAR_HOW_IT_WORKS: 'Kiel ĝi funkcias.'
     TOPBAR_PUBLISHED_DESC: 'tenas enhavon ankoraŭ ne publikigita. Pro tio, vi ne ricevos mesaĝon, kaj vi vidos la publikan version de la retejo.'
     TOPBAR_TWO_STATES: 'Paĝoj aperas en du statoj:'
+  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
+    db_ShareTokenSalt: 'Komuna ĵetona salo'
+    has_many_ShareTokens: 'Komunaj ĵetonoj'
   SilverStripe\ShareDraftContent\Models\ShareToken:
     PLURALNAME: 'Komunaj ĵetonoj'
     PLURALS:
@@ -22,3 +25,4 @@ eo:
     SINGULARNAME: 'Komuna ĵetono'
     db_Token: Ĵetono
     db_ValidForDays: 'Valida por tagoj'
+    has_one_Page: Paĝo
