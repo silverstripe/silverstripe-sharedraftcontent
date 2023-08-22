@@ -6,11 +6,11 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
   }
 } else {
   ss.i18n.addDictionary('en', {
-    "ShareDraftContent.LOADING": "Loading...",
-    "ShareDraftContent.FETCH_ERROR": "There was a problem generating the shareable link!",
     "ShareDraftContent.DESCRIPTION": "Anyone with this link can view the draft version of this page.",
+    "ShareDraftContent.FETCH_ERROR": "There was a problem generating the shareable link!",
     "ShareDraftContent.LEARN_MORE": "Learn more",
     "ShareDraftContent.LINK_HELP": "Link to share draft content",
+    "ShareDraftContent.LOADING": "Loading...",
     "ShareDraftContent.SHARE": "Share",
     "ShareDraftContent.SHARE_DRAFT_CONTENT": "Share draft content"
 });

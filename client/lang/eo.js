@@ -6,11 +6,11 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
   }
 } else {
   ss.i18n.addDictionary('eo', {
-    "ShareDraftContent.LOADING": "Ŝargas...",
-    "ShareDraftContent.FETCH_ERROR": "Okazis problemo generi la komunan ligilon!",
     "ShareDraftContent.DESCRIPTION": "Kiu havas ĉi tiun ligilon, tiu povas vidi la malnetan version de ĉi tiu paĝo.",
+    "ShareDraftContent.FETCH_ERROR": "Okazis problemo generi la komunan ligilon!",
     "ShareDraftContent.LEARN_MORE": "Lerni plu",
     "ShareDraftContent.LINK_HELP": "Ligi por kunhavi malnetan enhavon",
+    "ShareDraftContent.LOADING": "Ŝargas...",
     "ShareDraftContent.SHARE": "Kunhavigi",
     "ShareDraftContent.SHARE_DRAFT_CONTENT": "Kunhavigi malnetan enhavon"
 });
