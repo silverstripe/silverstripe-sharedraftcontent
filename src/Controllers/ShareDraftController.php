@@ -175,6 +175,9 @@ class ShareDraftController extends Controller
             ? $variables['_SERVER']['HTTP_USER_AGENT']
             : 'CLI';
 
+        // This extra step required for PHP-FPM/Nginx implementations
+        $variables['env'] = $variables['_SERVER'];
+
         Environment::setVariables($variables);
 
         // Health-check prior to creating environment
