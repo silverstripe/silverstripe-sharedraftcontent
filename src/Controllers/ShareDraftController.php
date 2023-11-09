@@ -52,10 +52,7 @@ class ShareDraftController extends Controller
      */
     protected static $isViewingPreview = false;
 
-    /**
-     * @var array
-     */
-    private $redirectRecursionIterations = [];
+    private array $redirectRecursionIterations = [];
 
     /**
      * @return bool
@@ -189,12 +186,12 @@ class ShareDraftController extends Controller
 
         if ($response->isRedirect()) {
             if (in_array($url, $this->redirectRecursionIterations)) {
-                throw new \Exception("Infinite recursion detected.".$this->getRedirectRecursionIterationsLog($url));
+                throw new \Exception("Infinite recursion detected." . $this->getRedirectRecursionIterationsLog($url));
             }
 
             $this->redirectRecursionIterations[] = $url;
             if (count($this->redirectRecursionIterations) >= 30) {
-                throw new \Exception("Max redirect recursions reached.".$this->getRedirectRecursionIterationsLog());
+                throw new \Exception("Max redirect recursions reached." . $this->getRedirectRecursionIterationsLog());
             }
 
             // The redirect will probably be Absolute URL so just want the path
@@ -206,15 +203,11 @@ class ShareDraftController extends Controller
         return $response;
     }
 
-    /**
-     * @param string $append_url
-     * @return string
-     */
-    protected function getRedirectRecursionIterationsLog(string $append_url=''): string
+    private function getRedirectRecursionIterationsLog(string $appendUrl= ''): string
     {
         return "\n\nRedirected URLs stack: \n"
             . implode("\n", $this->redirectRecursionIterations)
-            . ($append_url ? "\n$append_url" : '');
+            . ($appendUrl ? "\n$appendUrl" : '');
     }
 
     /**
