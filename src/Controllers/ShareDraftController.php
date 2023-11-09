@@ -203,7 +203,7 @@ class ShareDraftController extends Controller
         return $response;
     }
 
-    private function getRedirectRecursionIterationsLog(string $appendUrl= ''): string
+    private function getRedirectRecursionIterationsLog(string $appendUrl = ''): string
     {
         return "\n\nRedirected URLs stack: \n"
             . implode("\n", $this->redirectRecursionIterations)
