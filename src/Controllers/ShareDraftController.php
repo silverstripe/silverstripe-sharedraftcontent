@@ -51,6 +51,8 @@ class ShareDraftController extends Controller
      */
     protected static $isViewingPreview = false;
 
+    private array $redirectRecursionIterations = [];
+
     /**
      * @return bool
      */
@@ -144,8 +146,8 @@ class ShareDraftController extends Controller
         $variables['_SERVER']['HTTP_USER_AGENT'] =
             isset($variables['_SERVER']['HTTP_USER_AGENT']) &&
             $variables['_SERVER']['HTTP_USER_AGENT']
-            ? $variables['_SERVER']['HTTP_USER_AGENT']
-            : 'CLI';
+                ? $variables['_SERVER']['HTTP_USER_AGENT']
+                : 'CLI';
 
         Environment::setVariables($variables);
 
@@ -155,6 +157,15 @@ class ShareDraftController extends Controller
         $response = Director::singleton()->handleRequest($pageRequest);
 
         if ($response->isRedirect()) {
+            if (in_array($url, $this->redirectRecursionIterations)) {
+                throw new \Exception("Infinite recursion detected." . $this->getRedirectRecursionIterationsLog($url));
+            }
+
+            $this->redirectRecursionIterations[] = $url;
+            if (count($this->redirectRecursionIterations) >= 30) {
+                throw new \Exception("Max redirect recursions reached." . $this->getRedirectRecursionIterationsLog());
+            }
+
             // The redirect will probably be Absolute URL so just want the path
             $newUrl = parse_url($response->getHeader('location') ?? '', PHP_URL_PATH);
 
@@ -162,6 +173,13 @@ class ShareDraftController extends Controller
         }
 
         return $response;
+    }
+
+    private function getRedirectRecursionIterationsLog(string $appendUrl = ''): string
+    {
+        return "\n\nRedirected URLs stack: \n"
+            . implode("\n", $this->redirectRecursionIterations)
+            . ($appendUrl ? "\n$appendUrl" : '');
     }
 
     /**
