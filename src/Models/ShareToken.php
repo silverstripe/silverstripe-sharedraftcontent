@@ -7,11 +7,10 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBDatetime;
 
 /**
- * @method Page Page()
- *
  * @property int $ValidForDays
  * @property int $PageID
  * @property string $Token
+ * @method Page Page()
  */
 class ShareToken extends DataObject
 {
