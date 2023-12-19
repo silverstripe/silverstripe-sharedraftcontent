@@ -151,6 +151,11 @@ class ShareDraftController extends Controller
 
         Environment::setVariables($variables);
 
+        // This extra step required for PHP-FPM/Nginx implementations
+        Environment::setEnv('REQUEST_URI', $url);
+        Environment::setEnv('REQUEST_METHOD', 'GET');
+        Environment::setEnv('HTTP_USER_AGENT', $variables['_SERVER']['HTTP_USER_AGENT']);
+
         // Health-check prior to creating environment
         $pageRequest = HTTPRequestBuilder::createFromVariables($variables, @file_get_contents('php://input'));
 
