@@ -2,9 +2,13 @@
 
 namespace SilverStripe\ShareDraftContent\Extensions;
 
+use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;
 use SilverStripe\Security\Security;
 
+/**
+ * @extends Extension<Controller>
+ */
 class ShareDraftContentControllerExtension extends Extension
 {
     /**

@@ -81,7 +81,6 @@ class ShareDraftController extends Controller
                 ->setSession(Injector::inst()->create(Session::class, []))
                 ->getSession();
         }
-        /** @var ShareToken $shareToken */
         $shareToken = ShareToken::get()->filter('Token', $token)->first();
 
         if (!$shareToken) {

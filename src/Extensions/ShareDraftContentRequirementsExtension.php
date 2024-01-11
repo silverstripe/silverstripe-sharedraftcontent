@@ -2,9 +2,13 @@
 
 namespace SilverStripe\ShareDraftContent\Extensions;
 
+use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Requirements;
 
+/**
+ * @extends DataExtension<CMSMain>
+ */
 class ShareDraftContentRequirementsExtension extends DataExtension
 {
     public function init()
