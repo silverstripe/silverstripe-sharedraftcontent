@@ -8,6 +8,9 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;
 use SilverStripe\ShareDraftContent\Controllers\ShareDraftController;
 
+/**
+ * @extends Extension<FileShortcodeProvider>
+ */
 class ShareDraftContentFileShortcodeProviderExtension extends Extension
 {
     /**

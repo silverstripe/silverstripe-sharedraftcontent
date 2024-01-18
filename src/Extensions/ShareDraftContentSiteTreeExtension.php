@@ -13,9 +13,10 @@ use SilverStripe\ShareDraftContent\Models\ShareToken;
 use SilverStripe\Subsites\Model\Subsite;
 
 /**
- * @property SiteTree|ShareDraftContentSiteTreeExtension $owner
  * @property string $ShareTokenSalt
  * @method HasManyList<ShareToken> ShareTokens()
+ *
+ * @extends DataExtension<SiteTree&static>
  */
 class ShareDraftContentSiteTreeExtension extends DataExtension
 {
