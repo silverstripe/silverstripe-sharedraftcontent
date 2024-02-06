@@ -1,0 +1,9 @@
+{
+    "ShareDraftContent.DESCRIPTION": "Ktokoľvek s týmto odkazom si môže zobraziť koncept tejto stránky.",
+    "ShareDraftContent.FETCH_ERROR": "Pri generovaní odkazu na zdieľanie sa vyskytol problém!",
+    "ShareDraftContent.LEARN_MORE": "Zistiť viac",
+    "ShareDraftContent.LINK_HELP": "Odkaz na zdieľanie konceptu obsahu",
+    "ShareDraftContent.LOADING": "Načítava sa...",
+    "ShareDraftContent.SHARE": "Zdielať",
+    "ShareDraftContent.SHARE_DRAFT_CONTENT": "Zdielať koncept obsahu"
+}
