@@ -1,0 +1,30 @@
+sk:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Zmeniť režim zobrazenia'
+    DualWindowView: 'Dvojité okno'
+    EditView: 'Režim úprav'
+    PreviewView: 'Režim ukážky'
+    SplitView: 'Rozdelený režim'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: 'Stav konceptu'
+    PAGE_EXPIRED: 'Ojoj. Platnosť stránky, na ktorú sa pokúšate dostať <br> možno vypršala.'
+    PUBLISHED_STATE: 'Zverejnený stav'
+    TOPBAR_CURRENTLY_DRAFT: 'Prezeráte si <em>stav konceptu</em> tejto stránky. Každá ďalšia stránka, na ktorú prejdete bude vo <em>zverejnenom stave</em>.'
+    TOPBAR_DRAFT_DESC: 'Obsahuje obsah, ktorý ešte nebol zverejnený. Pri prezeraní stránok konceptov sa zobrazí správa, ktorá vás o tom bude informovať.'
+    TOPBAR_HOW_IT_WORKS: 'Ako to funguje.'
+    TOPBAR_PUBLISHED_DESC: 'Obsahuje obsah, ktorý bol zverejnený. V dôsledku toho nebudete na to upozornení a uvidíte živú verziu stránky.'
+    TOPBAR_TWO_STATES: 'Stránky sa zobrazujú v dvoch stavoch:'
+  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
+    db_ShareTokenSalt: 'Zdielať sol tokenu'
+    has_many_ShareTokens: 'Zdielať tokeny'
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: 'Tokeny na zdielanie'
+    PLURALS:
+      few: '{count} tokeny na zdielanie'
+      many: '{count} tokenov na zdielanie'
+      one: 'Token na zdielanie'
+      other: '{count} tokenov na zdielanie'
+    SINGULARNAME: 'Token na zdielanie'
+    db_Token: Token
+    db_ValidForDays: 'Platí počet dní'
+    has_one_Page: Stránka
