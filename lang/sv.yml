@@ -17,5 +17,4 @@ sv:
   SilverStripe\ShareDraftContent\Models\ShareToken:
     PLURALNAME: 'Dela Tokens'
     SINGULARNAME: 'Dela Token'
-    db_Token: Token
     db_ValidForDays: 'Giltig för dagar'

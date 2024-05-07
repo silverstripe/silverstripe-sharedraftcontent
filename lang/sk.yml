@@ -25,6 +25,5 @@ sk:
       one: 'Token na zdielanie'
       other: '{count} tokenov na zdielanie'
     SINGULARNAME: 'Token na zdielanie'
-    db_Token: Token
     db_ValidForDays: 'Platí počet dní'
     has_one_Page: Stránka
