@@ -1,4 +1,4 @@
-@import 'mixins.scss';
+@import 'mixins';
 
 html {
 	height: 100%;
@@ -8,7 +8,7 @@ html {
 	position: relative;
 	height: 100%;
 	margin: 0;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
 	font-weight: 300;
 	background: #eaf1f4;
 

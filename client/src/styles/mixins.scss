@@ -1,23 +1,23 @@
 @mixin mobile-screen {
-	@media (max-width: 768px) and (max-height: 540px) {
+	@media (width <= 768px) and (height <= 540px) {
 		@content;
 	}
 }
 
 @mixin small-screen {
-	@media (max-width: 768px) {
+	@media (width <= 768px) {
 		@content;
 	}
 }
 
 @mixin large-screen {
-	@media (min-width: 1441px) {
+	@media (width >= 1441px) {
 		@content;
 	}
 }
 
 @mixin topbar-small {
-	@media (max-width: 582px) {
+	@media (width <= 582px) {
 		@content;
 	}
 }

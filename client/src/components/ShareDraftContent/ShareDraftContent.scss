@@ -14,7 +14,7 @@
 }
 
 // Add the external link icon after the "learn more" link
-.share-draft-content__learn-more::after {
+.share-draft-content__learn-more:after {
   font-family: 'silverstripe';
   // font-icon-external-link
   content: '@';
