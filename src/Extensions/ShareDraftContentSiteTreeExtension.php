@@ -43,6 +43,15 @@ class ShareDraftContentSiteTreeExtension extends DataExtension
         'ShareTokens' => ShareToken::class,
     );
 
+    private static array $scaffold_cms_fields_settings = [
+        'ignoreFields' => [
+            'ShareTokenSalt',
+        ],
+        'ignoreRelations' => [
+            'ShareTokens',
+        ],
+    ];
+
     /**
      * @var array
      */
