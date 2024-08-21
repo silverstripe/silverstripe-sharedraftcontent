@@ -6,8 +6,10 @@ SilverStripe\CMS\Model\SiteTree:
   extensions:
     - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension
 SilverStripe\CMS\Controllers\CMSMain:
-  extensions:
-    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentRequirementsExtension
+  extra_requirements_css:
+    - 'silverstripe/sharedraftcontent: client/dist/styles/bundle-cms.css'
+  extra_requirements_javascript:
+    - 'silverstripe/sharedraftcontent: client/dist/js/bundle.js'
 SilverStripe\Control\Controller:
   extensions:
     - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentControllerExtension
