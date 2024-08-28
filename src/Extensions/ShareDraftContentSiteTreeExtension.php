@@ -6,7 +6,7 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Security\RandomGenerator;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
@@ -16,9 +16,9 @@ use SilverStripe\Subsites\Model\Subsite;
  * @property string $ShareTokenSalt
  * @method HasManyList<ShareToken> ShareTokens()
  *
- * @extends DataExtension<SiteTree&static>
+ * @extends Extension<SiteTree&static>
  */
-class ShareDraftContentSiteTreeExtension extends DataExtension
+class ShareDraftContentSiteTreeExtension extends Extension
 {
     /**
      * The number of days a shared link should be valid for, before expiring.
