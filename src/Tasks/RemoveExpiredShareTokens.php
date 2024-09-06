@@ -3,7 +3,10 @@
 namespace SilverStripe\ShareDraftContent\Tasks;
 
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\PolyExecution\PolyOutput;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 
 /**
  * Remove expired share tokens.
@@ -14,13 +17,13 @@ use SilverStripe\ShareDraftContent\Models\ShareToken;
  */
 class RemoveExpiredShareTokens extends BuildTask
 {
-    private static $segment = 'RemoveExpiredShareTokens';
+    protected static string $commandName = 'RemoveExpiredShareTokens';
 
-    protected $title = 'Remove expired share tokens';
+    protected string $title = 'Remove expired share tokens';
 
-    protected $description = 'Remove all expired ShareTokens from the database';
+    protected static string $description = 'Remove all expired ShareTokens from the database';
 
-    public function run($request)
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $shareTokens = ShareToken::get();
         $removeCount = 0;
@@ -32,6 +35,7 @@ class RemoveExpiredShareTokens extends BuildTask
             }
         }
 
-        echo "Removed $removeCount expired share tokens.\n";
+        $output->writeln("Removed $removeCount expired share tokens.");
+        return Command::SUCCESS;
     }
 }
