@@ -18,7 +18,7 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 
 class ShareDraftController extends Controller
