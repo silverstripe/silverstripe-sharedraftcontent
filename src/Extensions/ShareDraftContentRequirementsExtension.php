@@ -15,7 +15,7 @@ class ShareDraftContentRequirementsExtension extends DataExtension
 {
     public function __construct()
     {
-        Deprecation::withNoReplacement(
+        Deprecation::withSuppressedNotice(
             fn () => Deprecation::notice('5.3.0', 'Will be replaced with YAML configuration', Deprecation::SCOPE_CLASS)
         );
         parent::__construct();
