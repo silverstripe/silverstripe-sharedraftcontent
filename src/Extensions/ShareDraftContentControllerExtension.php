@@ -24,8 +24,8 @@ class ShareDraftContentControllerExtension extends Extension
     public function MakeShareDraftLink()
     {
         if ($member = Security::getCurrentUser()) {
-            if ($this->owner->hasMethod('CurrentPage') && $this->owner->CurrentPage()->canView($member)) {
-                return $this->owner->CurrentPage()->ShareTokenLink();
+            if ($this->owner->hasMethod('currentRecord') && $this->owner->currentRecord()->canView($member)) {
+                return $this->owner->currentRecord()->ShareTokenLink();
             }
             if ($this->owner->hasMethod('canView') && $this->owner->canView($member)) {
                 return $this->owner->ShareTokenLink();
