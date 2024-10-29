@@ -17,7 +17,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension;
 use SilverStripe\ShareDraftContent\Models\ShareToken;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 
