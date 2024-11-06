@@ -1,0 +1,9 @@
+{
+    "ShareDraftContent.DESCRIPTION": "Jeder, der über diesen Link verfügt, kann die Entwurfsfassung dieser Seite einsehen.",
+    "ShareDraftContent.FETCH_ERROR": "Es gab ein Problem bei der Generierung des teilbaren Links!",
+    "ShareDraftContent.LEARN_MORE": "Mehr erfahren",
+    "ShareDraftContent.LINK_HELP": "Link zum Teilen von Entwurfsinhalten",
+    "ShareDraftContent.LOADING": "Laden...",
+    "ShareDraftContent.SHARE": "Teilen",
+    "ShareDraftContent.SHARE_DRAFT_CONTENT": "Entwurfsinhalte teilen"
+}
