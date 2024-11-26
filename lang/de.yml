@@ -1,0 +1,27 @@
+de:
+  SilverStripe\Admin\LeftAndMain_ViewModeSelector:
+    ChangeViewMode: 'Ansichtsmodus ändern'
+    DualWindowView: 'Geteiltes Fenster'
+    EditView: Bearbeitungsmodus
+    PreviewView: Vorschau-Modus
+    SplitView: 'Geteilter Modus'
+  SilverStripe\ShareDraftContent\Controllers\ShareDraftController:
+    DRAFT_STATE: Entwurfsstatus
+    PAGE_EXPIRED: 'Ups. Die Seite, die Sie zu erreichen versuchen, ist möglicherweise abgelaufen.'
+    PUBLISHED_STATE: 'Veröffentlichter Stand'
+    TOPBAR_CURRENTLY_DRAFT: 'Sie sehen den <em>Entwurfsstatus</em> dieser Seite, jede Seite, zu der Sie navigieren, wird der <em>veröffentlichte Status</em> sein.'
+    TOPBAR_DRAFT_DESC: 'enthält Inhalte, die erst noch veröffentlicht werden müssen. Bei der Anzeige von Entwürfen erscheint eine Meldung, die Sie darüber informiert.'
+    TOPBAR_HOW_IT_WORKS: 'Wie es funktioniert.'
+    TOPBAR_PUBLISHED_DESC: 'enthält Inhalte, die bereits veröffentlicht wurden. Daher werden Sie nicht darüber benachrichtigt, sondern sehen die Live-Version der Website.'
+    TOPBAR_TWO_STATES: 'Die Seiten erscheinen in zwei Zuständen:'
+  SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension:
+    db_ShareTokenSalt: 'Tokensalz teilen'
+    has_many_ShareTokens: Teilen-Token
+  SilverStripe\ShareDraftContent\Models\ShareToken:
+    PLURALNAME: Teilen-Token
+    PLURALS:
+      one: 'Ein Teilen-Token'
+      other: '{count} Teilen-Tokens'
+    SINGULARNAME: Teilen-Token
+    db_ValidForDays: 'Gültig für Tage'
+    has_one_Page: Seite
