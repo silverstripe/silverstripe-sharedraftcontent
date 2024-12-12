@@ -53,9 +53,27 @@ class ShareDraftContentControllerExtension extends Extension
      */
     public function getShareDraftLinkAction()
     {
-        if ($this->owner->config()->get('url_segment')) {
-            return $this->owner->Link('MakeShareDraftLink');
+        $owner = $this->getOwner();
+        if (!$owner->config()->get('url_segment')) {
+            return '';
         }
-        return '';
+        $id = $this->getRecordID();
+        if (!$id) {
+            return '';
+        }
+        return $owner->Link(Controller::join_links('MakeShareDraftLink', $id));
+    }
+
+    private function getRecordID(): ?int
+    {
+        $owner = $this->getOwner();
+        if ($owner->hasMethod('currentRecordID')) {
+            return $owner->currentRecordID();
+        }
+        // Could be a non-LeftAndMain controller, since the extension is applied directly to Controller
+        if ($owner->hasMethod('CurrentPage')) {
+            return $owner->CurrentPage()?->ID;
+        }
+        return null;
     }
 }
