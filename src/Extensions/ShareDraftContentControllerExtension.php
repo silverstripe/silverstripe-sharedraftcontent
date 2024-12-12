@@ -4,6 +4,7 @@ namespace SilverStripe\ShareDraftContent\Extensions;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;
+use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 
 /**
@@ -24,15 +25,27 @@ class ShareDraftContentControllerExtension extends Extension
     public function MakeShareDraftLink()
     {
         if ($member = Security::getCurrentUser()) {
-            if ($this->owner->hasMethod('CurrentPage') && $this->owner->CurrentPage()->canView($member)) {
-                return $this->owner->CurrentPage()->ShareTokenLink();
+            if ($this->owner->hasMethod('currentRecord')) {
+                $link = $this->getShareTokenLink($this->owner->currentRecord(), $member);
+            } elseif ($this->owner->hasMethod('CurrentPage')) {
+                // Could be a non-LeftAndMain controller, since the extension is applied directly to Controller
+                $link = $this->getShareTokenLink($this->owner->CurrentPage(), $member);
             }
-            if ($this->owner->hasMethod('canView') && $this->owner->canView($member)) {
-                return $this->owner->ShareTokenLink();
-            }
+            $link ??= $this->getShareTokenLink($this->owner, $member);
+        }
+        if ($link) {
+            return $link;
         }
 
         return Security::permissionFailure();
+    }
+
+    private function getShareTokenLink(object $record, Member $member): ?string
+    {
+        if ($record->hasMethod('canView') && $record->canView($member)) {
+            return $record->ShareTokenLink();
+        }
+        return null;
     }
 
     /**
@@ -40,9 +53,27 @@ class ShareDraftContentControllerExtension extends Extension
      */
     public function getShareDraftLinkAction()
     {
-        if ($this->owner->config()->get('url_segment')) {
-            return $this->owner->Link('MakeShareDraftLink');
+        $owner = $this->getOwner();
+        if (!$owner->config()->get('url_segment')) {
+            return '';
         }
-        return '';
+        $id = $this->getRecordID();
+        if (!$id) {
+            return '';
+        }
+        return $owner->Link(Controller::join_links('MakeShareDraftLink', $id));
+    }
+
+    private function getRecordID(): ?int
+    {
+        $owner = $this->getOwner();
+        if ($owner->hasMethod('currentRecordID')) {
+            return $owner->currentRecordID();
+        }
+        // Could be a non-LeftAndMain controller, since the extension is applied directly to Controller
+        if ($owner->hasMethod('CurrentPage')) {
+            return $owner->CurrentPage()?->ID;
+        }
+        return null;
     }
 }
