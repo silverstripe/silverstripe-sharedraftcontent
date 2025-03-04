@@ -23,11 +23,12 @@ class ShareDraftContentFileShortcodeProviderExtension extends Extension
         if ($grant) {
             return;
         }
-        if (!Controller::has_curr()) {
+        $controller = Controller::curr();
+        if (!$controller) {
             return;
         }
 
-        $session = Controller::curr()->getRequest()->getSession();
+        $session = $controller->getRequest()->getSession();
 
         if (!$session) {
             return;
