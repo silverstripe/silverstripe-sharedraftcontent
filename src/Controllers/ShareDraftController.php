@@ -91,10 +91,6 @@ class ShareDraftController extends Controller
         $page = Versioned::get_by_stage(SiteTree::class, Versioned::DRAFT)
             ->byID($shareToken->PageID);
 
-        if (!$page) {
-            return $this->errorPage();
-        }
-
         $this->extend('updatePage', $page);
 
         if (!$page) {
