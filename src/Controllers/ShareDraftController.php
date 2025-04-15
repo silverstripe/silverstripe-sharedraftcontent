@@ -93,6 +93,10 @@ class ShareDraftController extends Controller
 
         $this->extend('updatePage', $page);
 
+        if (!$page) {
+            return $this->errorPage();
+        }
+
         $latest = Versioned::get_latest_version(SiteTree::class, $shareToken->PageID);
 
         if (!$shareToken->isExpired() && $page->generateKey($shareToken->Token) === $key) {
