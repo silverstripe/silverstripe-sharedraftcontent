@@ -9,14 +9,18 @@ use SilverStripe\View\Requirements;
 
 /**
  * @extends DataExtension<CMSMain>
- * @deprecated 5.3.0 Will be replaced with YAML configuration
+ * @deprecated 5.3.0 Will be replaced with YAML configuration in a future major release
  */
 class ShareDraftContentRequirementsExtension extends DataExtension
 {
     public function __construct()
     {
         Deprecation::withSuppressedNotice(
-            fn () => Deprecation::notice('5.3.0', 'Will be replaced with YAML configuration', Deprecation::SCOPE_CLASS)
+            fn () => Deprecation::notice(
+                '5.3.0',
+                'Will be replaced with YAML configuration in a future major release',
+                Deprecation::SCOPE_CLASS
+            )
         );
         parent::__construct();
     }
