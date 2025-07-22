@@ -29,6 +29,10 @@ class ShareToken extends DataObject
         'Page' => Page::class
     );
 
+    private static array $indexes = [
+        'Token' => true,
+    ];
+
     /**
      * @var string
      */
