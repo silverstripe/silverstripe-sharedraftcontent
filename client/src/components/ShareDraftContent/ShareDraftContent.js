@@ -121,6 +121,8 @@ class ShareDraftContent extends Component {
           rel="noopener noreferrer"
         >
           {i18n._t('ShareDraftContent.LEARN_MORE', 'Learn more')}
+          <span className="share-draft-content__learn-more__icon font-icon-external-link" aria-hidden="true" />
+          <span className="visually-hidden">({i18n._t('ShareDraftContent.EXTERNAL_LINK', 'external link')})</span>
         </a>}
       </p>
     );

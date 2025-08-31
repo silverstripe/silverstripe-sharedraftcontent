@@ -13,11 +13,8 @@
   }
 }
 
-// Add the external link icon after the "learn more" link
-.share-draft-content__learn-more:after {
-  font-family: 'silverstripe';
-  // font-icon-external-link
-  content: '@';
+// The external link icon after the "learn more" link
+.share-draft-content__learn-more__icon:before {
   margin-left: 5px;
 }
 
