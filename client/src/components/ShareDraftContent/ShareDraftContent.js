@@ -168,6 +168,7 @@ class ShareDraftContent extends Component {
     const popoverProps = {
       id,
       buttonClassName: button.className,
+      buttonIcon: button.icon,
       title: button.title,
       data: {
         popoverTitle: popover.title,
@@ -212,7 +213,7 @@ ShareDraftContent.propTypes = {
 ShareDraftContent.defaultProps = {
   id: 'share-draft-content',
   button: {
-    className: 'font-icon-share',
+    icon: 'share',
     title: i18n._t('ShareDraftContent.SHARE', 'Share'),
     tooltip: i18n._t('ShareDraftContent.SHARE_DRAFT_CONTENT', 'Share draft content'),
   },
@@ -222,7 +223,6 @@ ShareDraftContent.defaultProps = {
   links: {
     learnMore: '',
   },
-  popoverIcon: 'font-icon-share',
 };
 
 export { ShareDraftContent as Component };
