@@ -24,44 +24,39 @@ body {
 	}
 
 	.extra-information {
+		display: inline;
 		color: rgb(51, 51, 51);
-		width: 300px;
-		position: absolute;
-		background-color: #fff;
-		display: none;
+	}
+
+	.extra-information__control {
+		cursor: pointer;
+		display: inline list-item;
+		padding-left: 10px;
+	}
+
+	.extra-information__expanded {
 		text-align: left;
-		padding: 8px;
+		background-color: #fff;
+		padding: 10px;
+		margin-top: 8px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 400px;
 		-webkit-box-shadow: 0 -1px 4px #aaa;
 		-moz-box-shadow: 0 -1px 4px #aaa;
 		box-shadow: 0 -1px 4px #aaa;
-		top: 24px;
-		right: 0;
+	}
 
-		&:after {
-			content: '';
-			position: absolute;
-			top: -5px;
-			width: 10px;
-			height: 10px;
-			background: #fff;
-			right: 10%;
-			-webkit-box-shadow: -1px -1px 2px #aaa;
-			-moz-box-shadow: -1px -1px 2px #aaa;
-			box-shadow: -1px -1px 2px #aaa;
-			-moz-transform: rotate(45deg);
-			-webkit-transform: rotate(45deg);
-			transform: rotate(45deg);
-		}
+	.extra-information__list-title {
+		font-weight: bold;
+		font-style: italic;
+		margin-top: 10px;
+		display: list-item;
+	}
 
-		li {
-			margin: 8px 0 0 16px;
-			list-style: disc;
-		}
-
-		li:first-child {
-			margin: 0;
-			list-style: none;
-		}
+	.extra-information__list-title,
+	.extra-information__list-details {
+		margin-left: 10px;
 	}
 
 	.message {

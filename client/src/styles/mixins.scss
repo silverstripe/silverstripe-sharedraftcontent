@@ -17,7 +17,7 @@
 }
 
 @mixin topbar-small {
-	@media (width <= 582px) {
+	@media (width <= 765px) {
 		@content;
 	}
 }
