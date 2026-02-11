@@ -4,6 +4,7 @@ namespace SilverStripe\ShareDraftContent\Controllers;
 
 use BadMethodCallException;
 use PageController;
+use SilverStripe\Assets\File;
 use SilverStripe\Core\Environment;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
@@ -11,6 +12,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPRequestBuilder;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Control\HTTPStreamResponse;
 use SilverStripe\Control\Middleware\HTTPCacheControlMiddleware;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
@@ -70,9 +72,27 @@ class ShareDraftController extends Controller
     {
         // Ensure this URL doesn't get picked up by HTTP caches
         HTTPCacheControlMiddleware::singleton()->disableCache();
-
-        $key = $request->param('Key');
         $token = $request->param('Token');
+
+        $shareToken = ShareToken::get()->filter('Token', $token)->first();
+
+        if (!$shareToken) {
+            return $this->errorPage();
+        }
+
+        if ($shareToken->PageID) {
+            return $this->previewPage($shareToken);
+        }
+
+        if ($shareToken->FileID) {
+            return $this->previewFile($shareToken);
+        }
+    }
+
+    public function previewFile($shareToken)
+    {
+        $key = $this->request->param('Key');
+
         try {
             $session = $this->getRequest()->getSession();
         } catch (BadMethodCallException $e) {
@@ -81,10 +101,61 @@ class ShareDraftController extends Controller
                 ->setSession(Injector::inst()->create(Session::class, []))
                 ->getSession();
         }
-        $shareToken = ShareToken::get()->filter('Token', $token)->first();
 
-        if (!$shareToken) {
+        /** @var File|ShareDraftContentSiteTreeExtension $dataObject */
+        $dataObject = Versioned::get_by_stage(File::class, Versioned::DRAFT)
+            ->byID($shareToken->FileID);
+
+        $this->extend('updatePage', $dataObject);
+
+        $latest = Versioned::get_latest_version(File::class, $shareToken->FileID);
+
+        if (!$shareToken->isExpired() && $dataObject->generateKey($shareToken->Token) === $key) {
+            Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
+            // Temporarily un-secure the draft site and switch to draft
+            $oldSecured = $this->getIsDraftSecured($session);
+            $oldMode = Versioned::get_default_reading_mode();
+            static::$isViewingPreview = true;
+
+            // Process page inside an unsecured draft container
+            try {
+                $this->setIsDraftSecured($session, false);
+                Versioned::set_default_reading_mode('Stage.Stage');
+
+            } finally {
+                $this->setIsDraftSecured($session, $oldSecured);
+                // Use set_default_reading_mode() instead of set_reading_mode() because that's
+                // what's used in Versioned::choose_site_stage()
+                Versioned::set_default_reading_mode($oldMode);
+                static::$isViewingPreview = false;
+            }
+
+            $stream = $dataObject->getStream();
+            $size = $dataObject->getSize();
+            $mime = $dataObject->getMimeType();
+            $response = HTTPStreamResponse::create($stream, $size)
+                ->addHeader('Content-Type', $mime);
+
+            $response->addHeader('Cache-Control', 'private');
+
+            return $response;
+        } else {
             return $this->errorPage();
+        }
+
+    }
+
+    public function previewPage($shareToken)
+    {
+        $key = $this->request->param('Key');
+
+        try {
+            $session = $this->getRequest()->getSession();
+        } catch (BadMethodCallException $e) {
+            // Create a new session
+            $session = $this->getRequest()
+                ->setSession(Injector::inst()->create(Session::class, []))
+                ->getSession();
         }
 
         /** @var SiteTree|ShareDraftContentSiteTreeExtension $page */

@@ -3,6 +3,7 @@
 namespace SilverStripe\ShareDraftContent\Models;
 
 use Page;
+use SilverStripe\Assets\File;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBDatetime;
 
@@ -26,7 +27,8 @@ class ShareToken extends DataObject
      * @var array
      */
     private static $has_one = array(
-        'Page' => Page::class
+        'Page' => Page::class,
+        'File' => File::class,
     );
 
     /**

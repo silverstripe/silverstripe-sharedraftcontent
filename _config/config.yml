@@ -2,6 +2,9 @@
 Name: sharedraftcontent
 After: framework/routes#coreroutes
 ---
+SilverStripe\Assets\File:
+  extensions:
+    - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension
 SilverStripe\CMS\Model\SiteTree:
   extensions:
     - SilverStripe\ShareDraftContent\Extensions\ShareDraftContentSiteTreeExtension
