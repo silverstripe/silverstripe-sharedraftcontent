@@ -103,28 +103,42 @@ class ShareDraftController extends Controller
             Requirements::css('silverstripe/sharedraftcontent: client/dist/styles/bundle-frontend.css');
 
             // Temporarily un-secure the draft site and switch to draft
-            $oldSecured = $this->getIsDraftSecured($session);
-            $oldMode = Versioned::get_default_reading_mode();
+            $oldDraftSecured = $this->getIsDraftSecured($session);
+
+            $oldDefaultReadingMode = Versioned::get_default_reading_mode();
+            $oldReadingMode = Versioned::get_reading_mode();
+            $oldStage = Versioned::get_stage();
+
             static::$isViewingPreview = true;
 
-            // Process page inside an unsecured draft container
             try {
+                // Temporarily unsecure the draft site and switch to Draft
                 $this->setIsDraftSecured($session, false);
-                Versioned::set_default_reading_mode('Stage.Stage');
+                Versioned::set_default_reading_mode('Stage.' . Versioned::DRAFT);
+                Versioned::set_reading_mode('Stage.' . Versioned::DRAFT);
+                Versioned::set_stage(Versioned::DRAFT);
 
                 $rendered = $this->getRenderedPageByURL($page->Link());
 
-                // Render draft heading
-                $data = new ArrayData(array(
+                $data = new ArrayData([
                     'Page' => $page,
                     'Latest' => $latest,
-                ));
+                ]);
+
                 $include = (string) $data->renderWith('Includes/TopBar');
             } finally {
-                $this->setIsDraftSecured($session, $oldSecured);
-                // Use set_default_reading_mode() instead of set_reading_mode() because that's
-                // what's used in Versioned::choose_site_stage()
-                Versioned::set_default_reading_mode($oldMode);
+                // Restore original draft security, stage and reading mode
+                $this->setIsDraftSecured($session, $oldDraftSecured);
+
+                if ($oldReadingMode) {
+                    Versioned::set_default_reading_mode($oldDefaultReadingMode);
+                    Versioned::set_reading_mode($oldReadingMode);
+                }
+
+                if ($oldStage) {
+                    Versioned::set_stage($oldStage);
+                }
+
                 static::$isViewingPreview = false;
             }
 
